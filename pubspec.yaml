@@ -1,0 +1,434 @@
+name: komatzalef
+description: Komatz Alef
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: "3.0.1"
+
+environment:
+  sdk: ">=2.15.1 <3.0.0"
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+
+  share: any
+  blinking_text: any
+  just_audio: any
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  #cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^1.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  #
+  assets:
+    - images/ar.png
+    - images/us.png
+    - audios/aj.mp3
+    - audios/mizbeaj.mp3
+    - audios/nijoaj.mp3
+    - audios/vatisjaljal.mp3
+    - audios/jaio.mp3
+    - audios/jalo.mp3
+    - audios/mesaper.mp3
+    - audios/ielodim.mp3
+    - audios/melej.mp3
+    - audios/at.mp3
+    - audios/soundT.mp3
+    - audios/soundCH.mp3
+    - audios/vaiesht.mp3
+    - audios/soundSH.mp3
+    - audios/iaft.mp3
+    - audios/soundF.mp3
+    - audios/nafshejo.mp3
+    - audios/tishmeru.mp3
+    - audios/beshivtejo.mp3
+    - audios/soundV.mp3
+    - audios/hadevorim.mp3
+    - audios/metzavejo.mp3
+    - audios/diberu.mp3
+    - audios/hineni.mp3
+    - audios/ulelevi.mp3
+    - audios/halelu.mp3
+    - audios/tzolelu.mp3
+    - audios/boruj.mp3
+    - audios/kotonti.mp3
+    - audios/iojolti.mp3
+    - audios/soundL.mp3
+    - audios/soundR.mp3
+    - audios/ukeshartem.mp3
+    - audios/soundN.mp3
+    - audios/nofelim.mp3
+    - audios/boreju.mp3
+    - audios/soundRE.mp3
+    - audios/ishah.mp3
+    - audios/osah.mp3
+    - audios/azcarasah.mp3
+    - audios/a0000.mp3
+    - audios/a0001.mp3
+    - audios/a0002.mp3
+    - audios/a0003.mp3
+    - audios/a0004.mp3
+    - audios/a0005.mp3
+    - audios/a0006.mp3
+    - audios/a0007.mp3
+    - audios/a0008.mp3
+    - audios/a0009.mp3
+    - audios/a0010.mp3
+    - audios/a0011.mp3
+    - audios/a0012.mp3
+    - audios/a0013.mp3
+    - audios/a0014.mp3
+    - audios/a0015.mp3
+    - audios/a0017.mp3
+    - audios/a0018.mp3
+    - audios/a0019.mp3
+    - audios/a0020.mp3
+    - audios/a0021.mp3
+    - audios/a0022.mp3
+    - audios/a0024.mp3
+    - audios/a0026.mp3
+    - audios/a0027.mp3
+    - audios/a0028.mp3
+    - audios/a0029.mp3
+    - audios/a0030.mp3
+    - audios/a0031.mp3
+    - audios/a0032.mp3
+    - audios/a0100.mp3
+    - audios/a0101.mp3
+    - audios/a0102.mp3
+    - audios/a0103.mp3
+    - audios/a0104.mp3
+    - audios/a0105.mp3
+    - audios/a0106.mp3
+    - audios/a0107.mp3
+    - audios/a0108.mp3
+    - audios/a0109.mp3
+    - audios/a0110.mp3
+    - audios/a0111.mp3
+    - audios/a0112.mp3
+    - audios/a0114.mp3
+    - audios/a0115.mp3
+    - audios/a0117.mp3
+    - audios/a0119.mp3
+    - audios/a0120.mp3
+    - audios/a0121.mp3
+    - audios/a0122.mp3
+    - audios/a0124.mp3
+    - audios/a0126.mp3
+    - audios/a0127.mp3
+    - audios/a0128.mp3
+    - audios/a0129.mp3
+    - audios/a0130.mp3
+    - audios/a0131.mp3
+    - audios/a0200.mp3
+    - audios/a0201.mp3
+    - audios/a0202.mp3
+    - audios/a0203.mp3
+    - audios/a0204.mp3
+    - audios/a0205.mp3
+    - audios/a0206.mp3
+    - audios/a0207.mp3
+    - audios/a0208.mp3
+    - audios/a0209.mp3
+    - audios/a0210.mp3
+    - audios/a0211.mp3
+    - audios/a0212.mp3
+    - audios/a0214.mp3
+    - audios/a0215.mp3
+    - audios/a0217.mp3
+    - audios/a0219.mp3
+    - audios/a0220.mp3
+    - audios/a0221.mp3
+    - audios/a0222.mp3
+    - audios/a0224.mp3
+    - audios/a0226.mp3
+    - audios/a0227.mp3
+    - audios/a0228.mp3
+    - audios/a0229.mp3
+    - audios/a0230.mp3
+    - audios/a0231.mp3
+    - audios/a0300.mp3
+    - audios/a0301.mp3
+    - audios/a0302.mp3
+    - audios/a0303.mp3
+    - audios/a0304.mp3
+    - audios/a0305.mp3
+    - audios/a0306.mp3
+    - audios/a0307.mp3
+    - audios/a0308.mp3
+    - audios/a0309.mp3
+    - audios/a0310.mp3
+    - audios/a0311.mp3
+    - audios/a0312.mp3
+    - audios/a0314.mp3
+    - audios/a0315.mp3
+    - audios/a0317.mp3
+    - audios/a0319.mp3
+    - audios/a0320.mp3
+    - audios/a0321.mp3
+    - audios/a0322.mp3
+    - audios/a0324.mp3
+    - audios/a0326.mp3
+    - audios/a0327.mp3
+    - audios/a0328.mp3
+    - audios/a0329.mp3
+    - audios/a0330.mp3
+    - audios/a0331.mp3
+    - audios/a0500.mp3
+    - audios/a0501.mp3
+    - audios/a0502.mp3
+    - audios/a0503.mp3
+    - audios/a0504.mp3
+    - audios/a0505.mp3
+    - audios/a0506.mp3
+    - audios/a0507.mp3
+    - audios/a0508.mp3
+    - audios/a0509.mp3
+    - audios/a0510.mp3
+    - audios/a0511.mp3
+    - audios/a0512.mp3
+    - audios/a0514.mp3
+    - audios/a0515.mp3
+    - audios/a0517.mp3
+    - audios/a0519.mp3
+    - audios/a0520.mp3
+    - audios/a0521.mp3
+    - audios/a0522.mp3
+    - audios/a0524.mp3
+    - audios/a0526.mp3
+    - audios/a0527.mp3
+    - audios/a0528.mp3
+    - audios/a0529.mp3
+    - audios/a0530.mp3
+    - audios/a0531.mp3
+    - audios/a0600.mp3
+    - audios/a0601.mp3
+    - audios/a0602.mp3
+    - audios/a0603.mp3
+    - audios/a0604.mp3
+    - audios/a0605.mp3
+    - audios/a0606.mp3
+    - audios/a0607.mp3
+    - audios/a0608.mp3
+    - audios/a0609.mp3
+    - audios/a0610.mp3
+    - audios/a0611.mp3
+    - audios/a0612.mp3
+    - audios/a0614.mp3
+    - audios/a0615.mp3
+    - audios/a0617.mp3
+    - audios/a0619.mp3
+    - audios/a0620.mp3
+    - audios/a0621.mp3
+    - audios/a0622.mp3
+    - audios/a0624.mp3
+    - audios/a0626.mp3
+    - audios/a0627.mp3
+    - audios/a0628.mp3
+    - audios/a0629.mp3
+    - audios/a0630.mp3
+    - audios/a0631.mp3
+    - audios/a0700.mp3
+    - audios/a0701.mp3
+    - audios/a0702.mp3
+    - audios/a0703.mp3
+    - audios/a0704.mp3
+    - audios/a0705.mp3
+    - audios/a0706.mp3
+    - audios/a0707.mp3
+    - audios/a0708.mp3
+    - audios/a0709.mp3
+    - audios/a0710.mp3
+    - audios/a0711.mp3
+    - audios/a0712.mp3
+    - audios/a0714.mp3
+    - audios/a0715.mp3
+    - audios/a0717.mp3
+    - audios/a0719.mp3
+    - audios/a0720.mp3
+    - audios/a0721.mp3
+    - audios/a0722.mp3
+    - audios/a0724.mp3
+    - audios/a0726.mp3
+    - audios/a0727.mp3
+    - audios/a0728.mp3
+    - audios/a0729.mp3
+    - audios/a0730.mp3
+    - audios/a0731.mp3
+    - audios/n00.mp3
+    - audios/n01.mp3
+    - audios/n02.mp3
+    - audios/n03.mp3
+    - audios/n04.mp3
+    - audios/n05.mp3
+    - audios/n06.mp3
+    - audios/n07.mp3
+    - audios/n08.mp3
+    - audios/n09.mp3
+    - audios/o00.mp3
+    - audios/o01.mp3
+    - audios/o02.mp3
+    - audios/o03.mp3
+    - audios/o04.mp3
+    - audios/o05.mp3
+    - audios/o06.mp3
+    - audios/o07.mp3
+    - audios/o08.mp3
+    - audios/o09.mp3
+    - audios/o10.mp3
+    - audios/o11.mp3
+    - audios/o12.mp3
+    - audios/o13.mp3
+    - audios/o14.mp3
+    - audios/o15.mp3
+    - audios/o16.mp3
+    - audios/o17.mp3
+    - audios/o18.mp3
+    - audios/o19.mp3
+    - audios/o20.mp3
+    - audios/o21.mp3
+    - audios/o22.mp3
+    - audios/o23.mp3
+    - audios/o24.mp3
+    - audios/o25.mp3
+    - audios/o26.mp3
+    - audios/o27.mp3
+    - audios/o28.mp3
+    - audios/o29.mp3
+    - audios/o30.mp3
+    - audios/o31.mp3
+    - audios/o32.mp3
+    - audios/s00.mp3
+    - audios/s01.mp3
+    - audios/s02.mp3
+    - audios/s03.mp3
+    - audios/s04.mp3
+    - audios/s05ejad.mp3
+    - audios/s06baruj.mp3
+    - audios/s07shem.mp3
+    - audios/s08kevod.mp3
+    - audios/s09.mp3
+    - audios/s10.mp3
+    - audios/s11.mp3
+    - audios/s13.mp3
+    - audios/s14.mp3
+    - audios/s15.mp3
+    - audios/s16.mp3
+    - audios/s17.mp3
+    - audios/s18.mp3
+    - audios/s19.mp3
+    - audios/s20.mp3
+    - audios/s22.mp3
+    - audios/s23.mp3
+    - audios/s24.mp3
+    - audios/s25.mp3
+    - audios/s26.mp3
+    - audios/s27.mp3
+    - audios/s28.mp3
+    - audios/s29.mp3
+    - audios/s30.mp3
+    - audios/s31.mp3
+    - audios/s32.mp3
+    - audios/s33.mp3
+    - audios/s34.mp3
+    - audios/s35.mp3
+    - audios/s36.mp3
+    - audios/s37.mp3
+    - audios/s38.mp3
+    - audios/s39.mp3
+    - audios/s40.mp3
+    - audios/s41.mp3
+    - audios/s42.mp3
+    - audios/s43.mp3
+    - audios/s44.mp3
+    - audios/s45.mp3
+    - audios/s46.mp3
+    - audios/s47.mp3
+    - audios/s48.mp3
+    - audios/s49.mp3
+    - audios/s50.mp3
+    - audios/s51.mp3
+    - audios/s52.mp3
+    - audios/s53.mp3
+    - audios/s54.mp3
+
+
+  fonts:
+    - family: SBL
+      fonts:
+        - asset: fonts/sbl_hebrew.ttf
+
+
+
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware.
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  #fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/sbl_hebrew.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
+
+

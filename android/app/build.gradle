@@ -43,8 +43,8 @@ android {
         applicationId "org.jabadlaplata.komatzalef"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
-        versionCode 11
-        versionName "3.0.1"
+        versionCode 14
+        versionName "3.0.4"
     }
 
     signingConfigs {

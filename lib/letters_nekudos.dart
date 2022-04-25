@@ -137,8 +137,8 @@ class WidgetLettersNekudos extends StatelessWidget {
       ]));
       nekudos
           .add(Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-        buildNekuda('07'), // shuruk
-        buildNekuda('04'), // kubutz
+        buildNekuda('04'), // shuruk
+        buildNekuda('07'), // kubutz
         buildNekuda('06'), // jirik
       ]));
       nekudos
@@ -467,13 +467,13 @@ String buildGlobalStrings(int type, String nekuda, String ois) {
           return 'ֵ ';
         case "03":
           return 'ֶ ';
-        case "04":
+        case "07":
           return "וּ";
         case "05":
           return 'ֹ ';
         case "06":
           return 'ִ ';
-        case "07":
+        case "04":
           return 'ֻ ';
         case "08":
           return 'ְ ';
@@ -1126,7 +1126,7 @@ String buildGlobalStrings(int type, String nekuda, String ois) {
           break;
 
         // SHURUK
-        case '07':
+        case '04':
           switch (ois) {
             case "00":
               displayString = 'אֻ';
@@ -1230,7 +1230,7 @@ String buildGlobalStrings(int type, String nekuda, String ois) {
           }
           break;
 
-        case "04": // kubutz
+        case "07": // kubutz
           switch (ois) {
             case "00":
               displayString = 'אוּ';

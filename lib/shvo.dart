@@ -313,13 +313,13 @@ class WidgetShvoRules extends StatelessWidget {
 
         letters = [];
         letters.add(Letter(letter: "וּ"));
-        letters.add(Letter(letter: "קְ", file: "a0326.mp3", color: Colors.red));
+        letters.add(Letter(letter: "קְ", file: "soundK.mp3", color: Colors.blue));
         letters.add(Letter(letter: "שַׁ"));
         letters.add(Letter(letter: "רְ", file: "soundR.mp3", color: Colors.blue));
         letters.add(Letter(letter: "תֶּ"));
         letters.add(Letter(letter: "ם"));
 
-        words.add(Word(word: letters, file: "ukeshartem.mp3"));
+        words.add(Word(word: letters, file: "ukshartem.mp3"));
 
         letters = [];
         letters.add(Letter(letter: "נֹ"));
@@ -339,8 +339,8 @@ class WidgetShvoRules extends StatelessWidget {
         words.add(Word(word: letters, file: "boreju.mp3"));
 
 
-        spanish = "Cuando el SHEVO aparece después de una TNUO GUEDOILO que tiene una marca de cántico es siempre SHEVO NO. Si no hay marca de cántico, es un SHEVO NAJ.";
-        english = "When the SHEVO appears after a TNUO GEDOLO that has a chanting mark it's allways a SHEVO NO. If there is no chanting mark, it's a SHEVO NACH.";
+        spanish = "Cuando el SHEVO aparece después de una TNUO GUEDOILO que tiene una marca de cántico es siempre SHEVO NAJ. Si no hay marca de cántico, es un SHEVO NO. Si el SHEVO aparece después de un KUBUTZ al comienzo de una palabra, es un SHEVO NAJ, como en la palabra UKSHARTEM.";
+        english = "When the SHEVO appears after a TNUO GEDOLO that has a chanting mark it's allways a SHEVO NACH. If there is no chanting mark, it's a SHEVO NO. If the SHEVO appears after a KUBUTZ at the beginning of a word, it's a SHEVO NACH, like in the word UKSHARTEM.";
 
         break;
     }

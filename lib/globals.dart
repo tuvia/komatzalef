@@ -20,7 +20,8 @@ class ScreenDefinition {
   const ScreenDefinition(
       this.widget,
       this.title,
-      this.textColor, this.cardColor,
+      this.textColor,
+      this.cardColor,
       );
 
   final Widget widget;

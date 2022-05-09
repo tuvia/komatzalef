@@ -16,6 +16,7 @@ const List<Color> letterColors = [
   Colors.orange,
   Colors.brown,
   Colors.indigo,
+  Colors.white,
 ];
 
 
@@ -61,8 +62,8 @@ class OisProvider extends ChangeNotifier {
     letters.add(Ois('ן', "18"));
     letters.add(Ois('ס', "19"));
     letters.add(Ois('ע', "20"));
-    letters.add(Ois('פ', "21"));
-    letters.add(Ois('פּ', "22"));
+    letters.add(Ois('פּ', "21"));
+    letters.add(Ois('פ', "22"));
     letters.add(Ois('ף', "23"));
     letters.add(Ois('צ', "24"));
     letters.add(Ois('ץ', "25"));
@@ -96,6 +97,21 @@ class OisProvider extends ChangeNotifier {
     await audioPlayer.play();
   }
 
+  bool isEnde(Ois ois) {
+    switch (ois.ois) {
+      case "ך":
+      case "ךּ":
+      case "ץ":
+      case "ף":
+      case "ם":
+      case "ן":
+        return true;
+    }
+
+    return false;
+  }
+
+
   @override
   void dispose() {
     audioPlayer.dispose();
@@ -110,7 +126,7 @@ class Avara {
   late final String sound;
 
   Avara(this.avara, String sound) {
-    this.sound = 'a' + sound + "mp3";
+    this.sound = 'a' + sound + ".mp3";
   }
 }
 
@@ -121,7 +137,7 @@ const nekudaSegol = "03";
 const nekudaShuruk = "07";
 const nekudaJoilom = "05";
 const nekudaJoilomMole = "09";
-const nekudaJirik = "08";
+const nekudaJirik = "06";
 const nekudaKubutz = "04";
 
 enum Avaros {
@@ -153,7 +169,16 @@ class AvaraProvider extends ChangeNotifier {
   void play(Ois ois, Nekuda nekuda) async {
 
     // build avara string
-    String avara = "a" + nekuda.sound.substring(1, 3) + ois.sound.substring(1, 3);
+    String n = nekuda.sound.substring(1, 3);
+
+    // kubutz ans shuruk, joilom molei and joilom sound the same!!
+    if (n == "09") {
+      n = "05";
+    } else if (n == "04") {
+      n = "07";
+    }
+
+    String avara = "a" + n + ois.sound.substring(1, 3);
     await audioPlayer.setAsset("audios/" + avara + ".mp3");
     await audioPlayer.play();
   }
@@ -313,8 +338,8 @@ class AvaraProvider extends ChangeNotifier {
     komatz.add(Avara('ן', nekudaKomatz + "18"));
     komatz.add(Avara('סָ', nekudaKomatz + "19"));
     komatz.add(Avara('עָ', nekudaKomatz + "20"));
-    komatz.add(Avara('פָ', nekudaKomatz + "21"));
-    komatz.add(Avara('פָּ', nekudaKomatz + "22"));
+    komatz.add(Avara('פָּ', nekudaKomatz + "21"));
+    komatz.add(Avara('פָ', nekudaKomatz + "22"));
     komatz.add(Avara('ף', nekudaKomatz + "23"));
     komatz.add(Avara('צָ', nekudaKomatz + "24"));
     komatz.add(Avara('ץ', nekudaKomatz + "25"));
@@ -347,8 +372,8 @@ class AvaraProvider extends ChangeNotifier {
     pataj.add(Avara('ןַ', nekudaPataj + "18"));
     pataj.add(Avara('סַ', nekudaPataj + "19"));
     pataj.add(Avara('עַ', nekudaPataj + "20"));
-    pataj.add(Avara('פַ', nekudaPataj + "21"));
-    pataj.add(Avara('פַּ', nekudaPataj + "22"));
+    pataj.add(Avara('פַּ', nekudaPataj + "21"));
+    pataj.add(Avara('פַ', nekudaPataj + "22"));
     pataj.add(Avara('ף', nekudaPataj + "23"));
     pataj.add(Avara('צַ', nekudaPataj + "24"));
     pataj.add(Avara('ץ', nekudaPataj + "25"));
@@ -381,8 +406,8 @@ class AvaraProvider extends ChangeNotifier {
     segol.add(Avara('ן', nekudaSegol + "18"));
     segol.add(Avara('סֶ', nekudaSegol + "19"));
     segol.add(Avara('עֶ', nekudaSegol + "20"));
-    segol.add(Avara('פֶ', nekudaSegol + "21"));
-    segol.add(Avara('פֶּ', nekudaSegol + "22"));
+    segol.add(Avara('פֶּ', nekudaSegol + "21"));
+    segol.add(Avara('פֶ', nekudaSegol + "22"));
     segol.add(Avara('ף', nekudaSegol + "23"));
     segol.add(Avara('צֶ', nekudaSegol + "24"));
     segol.add(Avara('ץ', nekudaSegol + "25"));
@@ -415,8 +440,8 @@ class AvaraProvider extends ChangeNotifier {
     tzeire.add(Avara('ן', nekudaTzeire + "18"));
     tzeire.add(Avara('סֵ', nekudaTzeire + "19"));
     tzeire.add(Avara('עֵ', nekudaTzeire + "20"));
-    tzeire.add(Avara('פֵ', nekudaTzeire + "21"));
-    tzeire.add(Avara('פֵּ', nekudaTzeire + "22"));
+    tzeire.add(Avara('פֵּ', nekudaTzeire + "21"));
+    tzeire.add(Avara('פֵ', nekudaTzeire + "22"));
     tzeire.add(Avara('ף', nekudaTzeire + "23"));
     tzeire.add(Avara('צֵ', nekudaTzeire + "24"));
     tzeire.add(Avara('ץ', nekudaTzeire + "25"));
@@ -449,8 +474,8 @@ class AvaraProvider extends ChangeNotifier {
     shuruk.add(Avara('ן', nekudaShuruk + "18"));
     shuruk.add(Avara('סוּ', nekudaShuruk + "19"));
     shuruk.add(Avara('עוּ', nekudaShuruk + "20"));
-    shuruk.add(Avara('פוּ', nekudaShuruk + "21"));
-    shuruk.add(Avara('פּוּ', nekudaShuruk + "22"));
+    shuruk.add(Avara('פּוּ', nekudaShuruk + "21"));
+    shuruk.add(Avara('פוּ', nekudaShuruk + "22"));
     shuruk.add(Avara('ף', nekudaShuruk + "23"));
     shuruk.add(Avara('צוּ', nekudaShuruk + "24"));
     shuruk.add(Avara('ץ', nekudaShuruk + "25"));
@@ -483,8 +508,8 @@ class AvaraProvider extends ChangeNotifier {
     kubutz.add(Avara('ן', nekudaKubutz + "18"));
     kubutz.add(Avara('סֻ', nekudaKubutz + "19"));
     kubutz.add(Avara('עֻ', nekudaKubutz + "20"));
-    kubutz.add(Avara('פֻ', nekudaKubutz + "21"));
-    kubutz.add(Avara('פֻּ', nekudaKubutz + "22"));
+    kubutz.add(Avara('פֻּ', nekudaKubutz + "21"));
+    kubutz.add(Avara('פֻ', nekudaKubutz + "22"));
     kubutz.add(Avara('ף', nekudaKubutz + "23"));
     kubutz.add(Avara('צֻ', nekudaKubutz + "24"));
     kubutz.add(Avara('ץ', nekudaKubutz + "25"));
@@ -517,8 +542,8 @@ class AvaraProvider extends ChangeNotifier {
     joilom.add(Avara('ן', nekudaJoilom + "18"));
     joilom.add(Avara('סֹ', nekudaJoilom + "19"));
     joilom.add(Avara('עֹ', nekudaJoilom + "20"));
-    joilom.add(Avara('פֹ', nekudaJoilom + "21"));
-    joilom.add(Avara('פֹּ', nekudaJoilom + "22"));
+    joilom.add(Avara('פֹּ', nekudaJoilom + "21"));
+    joilom.add(Avara('פֹ', nekudaJoilom + "22"));
     joilom.add(Avara('ף', nekudaJoilom + "23"));
     joilom.add(Avara('צֹ', nekudaJoilom + "24"));
     joilom.add(Avara('ץ', nekudaJoilom + "25"));
@@ -551,8 +576,8 @@ class AvaraProvider extends ChangeNotifier {
     joilomMole.add(Avara('ן', nekudaJoilomMole + "18"));
     joilomMole.add(Avara('סוֹ', nekudaJoilomMole + "19"));
     joilomMole.add(Avara('עוֹ', nekudaJoilomMole + "20"));
-    joilomMole.add(Avara('פוֹ', nekudaJoilomMole + "21"));
-    joilomMole.add(Avara('פּוֹ', nekudaJoilomMole + "22"));
+    joilomMole.add(Avara('פּוֹ', nekudaJoilomMole + "21"));
+    joilomMole.add(Avara('פוֹ', nekudaJoilomMole + "22"));
     joilomMole.add(Avara('ף', nekudaJoilomMole + "23"));
     joilomMole.add(Avara('צוֹ', nekudaJoilomMole + "24"));
     joilomMole.add(Avara('ץ', nekudaJoilomMole + "25"));
@@ -585,8 +610,8 @@ class AvaraProvider extends ChangeNotifier {
     jirik.add(Avara('ן', nekudaJirik + "18"));
     jirik.add(Avara('סִ', nekudaJirik + "19"));
     jirik.add(Avara('עִ', nekudaJirik + "20"));
-    jirik.add(Avara('פִ', nekudaJirik + "21"));
-    jirik.add(Avara('פִּ', nekudaJirik + "22"));
+    jirik.add(Avara('פִּ', nekudaJirik + "21"));
+    jirik.add(Avara('פִ', nekudaJirik + "22"));
     jirik.add(Avara('ף', nekudaJirik + "23"));
     jirik.add(Avara('צִ', nekudaJirik + "24"));
     jirik.add(Avara('ץ', nekudaJirik + "25"));
@@ -599,6 +624,45 @@ class AvaraProvider extends ChangeNotifier {
 
     workingAvara.addAll(komatz);
   }
+
+  List<Avara> _getAvaraList(Nekuda nekuda) {
+    String n = nekuda.sound.substring(1, 3);
+
+    switch (n) {
+      case "00":
+        return komatz;
+      case "01":
+        return pataj;
+      case "02":
+        return tzeire;
+      case "03":
+        return segol;
+      case "07":
+        return shuruk;
+      case "04":
+        return kubutz;
+      case "05":
+        return joilom;
+      case "09":
+        return joilomMole;
+      case "06":
+        return jirik;
+    }
+
+    return komatz;
+  }
+
+
+
+  String getAvara(Ois ois, Nekuda nekuda) {
+    List<Avara> _list = _getAvaraList(nekuda);
+
+    // find the proper avara in the list
+    int index = _list.indexWhere((element) => element.sound.substring(3, 5).contains(ois.sound.substring(1, 3)));
+    return _list[index].avara;
+  }
+
+
 }
 
 
@@ -632,8 +696,9 @@ class NekudaProvider extends ChangeNotifier {
     nekudos.add(Nekuda('ֹ ', "05")); // joilom
     nekudos.add(Nekuda('ִ ', "06")); // jirik
     nekudos.add(Nekuda("וּ", "07")); // kubutz
-    nekudos.add(Nekuda('ְ ', "08")); // shvo
     nekudos.add(Nekuda('ֹו', "09")); // Joilom Molei
+    nekudos.add(Nekuda('ְ ', "08")); // shvo
+
 
     workingNekudos.addAll(nekudos);
 
@@ -703,7 +768,7 @@ class _WidgetLettersNekudosState extends State<WidgetLettersNekudos> {
           wl.add(buildOis(oisProvider, _list[i]));
         }
 
-        return Center(
+        return SingleChildScrollView(
             child: Wrap(
               textDirection: TextDirection.rtl,
               alignment: WrapAlignment.center,
@@ -794,7 +859,7 @@ class _WidgetNekudosState extends State<WidgetNekudos> {
           wl.add(buildNekuda(nekudaProvider, _list[i]));
         }
 
-        return Center(
+        return SingleChildScrollView(
           child: Wrap(
             textDirection: TextDirection.rtl,
             alignment: WrapAlignment.center,
@@ -905,24 +970,23 @@ class _WidgetAvarosState extends State<WidgetAvaros> {
       List<Widget> wl2 = [];
 
 
-      // change the colors of the letters
-      colorIndex++;
-      if (colorIndex >= letterColors.length) {
-        colorIndex = 0;
-      }
-
       for (int i = 0; i < letters.length; i++) {
         wl1.add(TextButton(
           style: TextButton.styleFrom(
             padding: EdgeInsets.zero,
           ),
           onPressed: () async {
+            _oisProvider.play(letters[i]);
 
-            if (!wasNekudaPressed) {
-              _oisProvider.play(letters[i]);
-              await Future.delayed(const Duration(seconds: 1));
+            if (!_oisProvider.isEnde(letters[i])) {
+              if (wasNekudaPressed && !_oisProvider.isEnde(letters[i])) {
+                await Future.delayed(const Duration(milliseconds: 900));
+                _avaraProvider.play(letters[i], nekudaPressed);
+                wasNekudaPressed = false;
+
+                await dialogScreen(context, letters[i], nekudaPressed);
+              }
             } else {
-              _avaraProvider.play(letters[i], nekudaPressed);
               wasNekudaPressed = false;
             }
           },
@@ -981,22 +1045,80 @@ class _WidgetAvarosState extends State<WidgetAvaros> {
       }
 
 
-      return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Wrap(
-      textDirection: TextDirection.rtl,
-        alignment: WrapAlignment.center,
-        children: wl1,
-      ),
-            const SizedBox(height: 10,),
-            Wrap(
-              textDirection: TextDirection.rtl,
-              alignment: WrapAlignment.center,
-              children: wl2,
-            ),
-          ]);
+      return SingleChildScrollView(
+        child: Column(
+            //mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Wrap(
+        textDirection: TextDirection.rtl,
+          alignment: WrapAlignment.center,
+          children: wl1,
+        ),
+              const SizedBox(height: 10,),
+              Wrap(
+                textDirection: TextDirection.rtl,
+                alignment: WrapAlignment.center,
+                children: wl2,
+              ),
+            ]),
+      );
 
   }
+
+
+  /*
+ * This functions actually shows a letter or avara
+ */
+  Future dialogScreen(BuildContext context, Ois ois, Nekuda nekuda) async {
+
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: globalColor,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  _avaraProvider.getAvara(ois, nekuda),
+                  style: const TextStyle(
+                    fontSize: 300,
+                    fontFamily: 'SBL',
+                    shadows: [
+                      Shadow(
+                        offset: Offset(5.0, 5.0),
+                        blurRadius: 10.0,
+                        color: Colors.black,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: FloatingActionButton(
+                    onPressed: () async {
+                      _avaraProvider.play(ois, nekuda);
+                    },
+                    child: const Icon(Icons.replay),
+                    backgroundColor: Colors.blue,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 }
+
+

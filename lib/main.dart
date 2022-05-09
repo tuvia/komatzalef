@@ -14,9 +14,7 @@ import 'globals.dart';
  * Main screens
  */
 const List<ScreenDefinition> screenList = [
-  //ScreenDefinition(WidgetLettersNekudos(type: LettersScreenType.justLetters, title:  "אבג",), "אבג", Colors.red, Colors.amber),
-  //ScreenDefinition(WidgetLettersNekudos(type: LettersScreenType.justNekudos, title: "ֵ ַ ָ ",), "ֵ ַ ָ ", Colors.amber, Colors.red),
-  //ScreenDefinition(WidgetLettersNekudos(type: LettersScreenType.lettersWithNekudos, title: "אָבָגָ",), "אָבָגָ", Colors.blue, Colors.lime),
+
   ScreenDefinition(
       WidgetLettersNekudos(
         title: "אבג",
@@ -129,7 +127,7 @@ class _WidgetMainState extends State<WidgetMain> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: globalColor,
-        appBar: buildAppBar(globalTitle),
+        appBar: buildAppBar(context, globalTitle),
         body: Container(
             color: globalColor,
             padding: const EdgeInsets.all(globalInset),

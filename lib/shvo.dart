@@ -39,7 +39,7 @@ class WidgetShvo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: globalColor,
-        appBar: buildAppBar(title),
+        appBar: buildAppBar(context, title),
     body:
         Container(
             padding: const EdgeInsets.all(globalInset),
@@ -345,7 +345,7 @@ class WidgetShvoRules extends StatelessWidget {
         break;
     }
 
-    return buildWordsScreen(title, words, spanish: spanish, english: english, type: type);
+    return buildWordsScreen(context, title, words, spanish: spanish, english: english, type: type);
   }
 }
 

@@ -1,7 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:komatzalef/shvo.dart';
 import 'package:share/share.dart';
-import 'dart:io';
 import 'package:blinking_text/blinking_text.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -14,6 +14,8 @@ const globalTitle = "Komatz Alef";
 
 const double globalElevation = 12.0;
 const double globalInset = 8.0;
+const String globalFontFamily = "SBL";
+const double globalFontSize = 70;
 
 
 class ScreenDefinition {
@@ -165,7 +167,7 @@ Widget buildDescriptions({required String english, required String spanish}) {
 /*
  * This function build the regular screen showing words
  */
-Widget buildWordsScreen(String title, List<Word> words, {String spanish = "", String english = "", ShvoType type = ShvoType.one}) {
+Widget buildWordsScreen(BuildContext context, String title, List<Word> words, {String spanish = "", String english = "", ShvoType type = ShvoType.one}) {
   List<Widget> wl = [];
 
   // This would be the description of the rules explained
@@ -203,7 +205,7 @@ Widget buildWordsScreen(String title, List<Word> words, {String spanish = "", St
 
   return Scaffold(
     backgroundColor: globalColor,
-    appBar: buildAppBar(title),
+    appBar: buildAppBar(context, title),
     body: Padding(
       padding: const EdgeInsets.all(globalInset),
       child: SingleChildScrollView(
@@ -238,7 +240,7 @@ Widget buildScreenButtons(List<ScreenDefinition> screens) {
             textAlign: TextAlign.center,
             style: TextStyle(
               color: screens[index].textColor,
-              fontFamily: "SBL",
+              fontFamily: globalFontFamily,
               fontSize: 70,
               shadows: const [
                 Shadow(
@@ -280,10 +282,21 @@ void play(String file) async {
    * This is because of the Parental Gate.
    * All Screens call this function
    */
-AppBar buildAppBar(String title) {
+AppBar buildAppBar(BuildContext context, String title) {
+  IconButton helpIcon = IconButton(
+    onPressed: () {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const WidgetHelpScreen()));
+    }, icon: const Icon(Icons.help),
+  );
+
   if (Platform.isAndroid) {
+
     return AppBar(
       actions: [
+        helpIcon,
         IconButton(
             onPressed: () {
               const url =
@@ -295,19 +308,51 @@ AppBar buildAppBar(String title) {
             icon: const Icon(Icons.share)),
       ],
       title: Text(title, style: const TextStyle(
-        fontFamily: "SBL",
+        fontFamily: globalFontFamily,
         fontSize: 30,
       ),),
     );
   } else {
     return AppBar(
+      actions: [
+        helpIcon,
+      ],
       title: Text(title, style: const TextStyle(
-      fontFamily: "SBL",
+        fontFamily: globalFontFamily,
         fontSize: 30,
       ),),
     );
   }
 }
+
+
+
+/*
+ * This widget prints the disclaimer message
+ */
+class WidgetHelpScreen extends StatelessWidget {
+  const WidgetHelpScreen({Key? key}) : super(key: key);
+
+  static String spanish = "Sobre gramática hebrea hay dos opiniones generales: GRO (Gaón Rabí Eliahu) y RAZO (Rabí Zalman Heno). Los líderes de Jabad acostumbraban a pronunciar como el RAZO. Esa es la costumbre de Jabad. Esta aplicación está construida alrededor de esa opinión.";
+  static String english = "Regarding hebrew grammar there are two general opinions: GRO (Gaon Rabbi Elyiahu) and RAZO (Rabbi Zalman Heno). The Chabad leaders used to pronounce like the RAZO. That is the custom in Chabad. This application is built around that opinion.";
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: globalColor,
+      appBar: buildAppBar(context, ""),
+      body: Padding(
+        padding: const EdgeInsets.all(globalInset),
+        child: SingleChildScrollView(
+            child:  buildDescriptions(english: english, spanish: spanish)
+        ),
+      ),
+    );
+  }
+}
+
+
+
 
 
 /*

@@ -115,7 +115,7 @@ class _WidgetShemaState extends State<WidgetShema> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: globalColor,
-      appBar: buildAppBar(widget.title),
+      appBar: buildAppBar(context, widget.title),
       body: Padding(
         padding: const EdgeInsets.all(globalInset),
         child: SingleChildScrollView(

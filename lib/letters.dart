@@ -86,10 +86,12 @@ class OisProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void arrange() {
+  void arrange({bool notify = true}) {
     workingLetters.clear();
     workingLetters.addAll(letters);
-    notifyListeners();
+    if (notify) {
+      notifyListeners();
+    }
   }
 
   void play(Ois ois) async {
@@ -654,12 +656,12 @@ class AvaraProvider extends ChangeNotifier {
 
 
 
-  String getAvara(Ois ois, Nekuda nekuda) {
+  Avara getAvara(Ois ois, Nekuda nekuda) {
     List<Avara> _list = _getAvaraList(nekuda);
 
     // find the proper avara in the list
     int index = _list.indexWhere((element) => element.sound.substring(3, 5).contains(ois.sound.substring(1, 3)));
-    return _list[index].avara;
+    return _list[index];
   }
 
 
@@ -670,8 +672,9 @@ class AvaraProvider extends ChangeNotifier {
 class Nekuda {
   final String nekuda;
   late String sound;
+  final String withAlef;
 
-  Nekuda(this.nekuda, this.sound) {
+  Nekuda(this.nekuda, this.sound, this.withAlef) {
     sound = 'n' + sound + '.mp3';
   }
 }
@@ -688,16 +691,16 @@ class NekudaProvider extends ChangeNotifier {
     // Initialize audio player
     audioPlayer = AudioPlayer();
 
-    nekudos.add(Nekuda('ָ ', "00")); // komatz
-    nekudos.add(Nekuda('ַ ', "01")); // pataj
-    nekudos.add(Nekuda('ֵ ', "02")); // tzeire
-    nekudos.add(Nekuda('ֶ ', "03")); // segol
-    nekudos.add(Nekuda('ֻ ', "04")); // shuruk
-    nekudos.add(Nekuda('ֹ ', "05")); // joilom
-    nekudos.add(Nekuda('ִ ', "06")); // jirik
-    nekudos.add(Nekuda("וּ", "07")); // kubutz
-    nekudos.add(Nekuda('ֹו', "09")); // Joilom Molei
-    nekudos.add(Nekuda('ְ ', "08")); // shvo
+    nekudos.add(Nekuda('ָ ', "00", "אָ")); // komatz
+    nekudos.add(Nekuda('ַ ', "01", "אַ")); // pataj
+    nekudos.add(Nekuda('ֵ ', "02", "אֵ")); // tzeire
+    nekudos.add(Nekuda('ֶ ', "03", "אֶ")); // segol
+    nekudos.add(Nekuda('ֻ ', "04", "אֻ")); // shuruk
+    nekudos.add(Nekuda('ֹ ', "05", "אֹ")); // joilom
+    nekudos.add(Nekuda('ִ ', "06", "אִ")); // jirik
+    nekudos.add(Nekuda("וּ", "07", "אוּ")); // kubutz
+    nekudos.add(Nekuda('ֹו', "09", "אוֹ")); // Joilom Molei
+    nekudos.add(Nekuda('ְ ', "08", "אְ")); // shvo
 
 
     workingNekudos.addAll(nekudos);
@@ -726,10 +729,12 @@ class NekudaProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void arrange() {
+  void arrange({bool notify = true}) {
     workingNekudos.clear();
     workingNekudos.addAll(nekudos);
-    notifyListeners();
+    if (notify) {
+      notifyListeners();
+    }
   }
 
 }
@@ -759,7 +764,7 @@ class _WidgetLettersNekudosState extends State<WidgetLettersNekudos> {
 
     return Scaffold(
       backgroundColor: globalColor,
-      appBar: buildAppBar(widget.title),
+      appBar: buildAppBar(context, widget.title),
       body: Consumer<OisProvider>(builder: (context, oisProvider, child) {
         List _list = oisProvider.get();
 
@@ -814,11 +819,12 @@ class _WidgetLettersNekudosState extends State<WidgetLettersNekudos> {
       ),
       onPressed: () async {
         oisProvider.play(ois);
+        await dialogScreen(context, ois.ois, ois.sound);
       },
       child: Text(ois.ois,
           style: TextStyle(
-            fontFamily: "SBL",
-            fontSize: 60,
+            fontFamily: globalFontFamily,
+            fontSize: globalFontSize,
             color: letterColors[colorIndex],
             shadows: const [
               Shadow(
@@ -850,7 +856,7 @@ class _WidgetNekudosState extends State<WidgetNekudos> {
 
     return Scaffold(
       backgroundColor: globalColor,
-      appBar: buildAppBar(widget.title),
+      appBar: buildAppBar(context, widget.title),
       body: Consumer<NekudaProvider>(builder: (context, nekudaProvider, child) {
         List _list = nekudaProvider.get();
 
@@ -858,6 +864,9 @@ class _WidgetNekudosState extends State<WidgetNekudos> {
         for (int i = 0; i < _list.length; i++) {
           wl.add(buildNekuda(nekudaProvider, _list[i]));
         }
+
+        wl.add(const SizedBox(height: 15,));
+        wl.add(buildNekudosTable());
 
         return SingleChildScrollView(
           child: Wrap(
@@ -904,11 +913,12 @@ class _WidgetNekudosState extends State<WidgetNekudos> {
       ),
       onPressed: () async {
         nekudaProvider.play(nekuda);
+        await dialogScreen(context, nekuda.withAlef, nekuda.sound);
       },
       child: Text(nekuda.nekuda,
           style: TextStyle(
-            fontFamily: "SBL",
-            fontSize: 60,
+            fontFamily: globalFontFamily,
+            fontSize: globalFontSize,
             color: letterColors[colorIndex],
             shadows: const [
               Shadow(
@@ -944,7 +954,11 @@ class _WidgetAvarosState extends State<WidgetAvaros> {
   @override
   void initState() {
     _oisProvider = Provider.of<OisProvider>(context, listen: false);
+    _oisProvider.arrange(notify: false);
+
     _nekudaProvider = Provider.of<NekudaProvider>(context, listen: false);
+    _nekudaProvider.arrange(notify: false);
+
     _avaraProvider = Provider.of<AvaraProvider>(context, listen: false);
     super.initState();
   }
@@ -955,7 +969,7 @@ class _WidgetAvarosState extends State<WidgetAvaros> {
 
       return Scaffold(
         backgroundColor: globalColor,
-        appBar: buildAppBar(widget.title),
+        appBar: buildAppBar(context, widget.title),
         body: buildAvaros(),
       );
     }
@@ -966,9 +980,14 @@ class _WidgetAvarosState extends State<WidgetAvaros> {
 
       List<Ois> letters = _oisProvider.get();
       List<Nekuda> nekudos = _nekudaProvider.get();
+
       List<Widget> wl1 = [];
       List<Widget> wl2 = [];
 
+      String spanish = "Para escuchar la combinación de letras con puntuaciones presiona primero una pronunciación y luego la letra.";
+      String english = "To hear the combination of letters with punctuation, first press the pronunciacion and then the letter.";
+      wl1.add(buildDescriptions(spanish: spanish, english: english));
+      wl1.add(const SizedBox(height: 15));
 
       for (int i = 0; i < letters.length; i++) {
         wl1.add(TextButton(
@@ -984,7 +1003,8 @@ class _WidgetAvarosState extends State<WidgetAvaros> {
                 _avaraProvider.play(letters[i], nekudaPressed);
                 wasNekudaPressed = false;
 
-                await dialogScreen(context, letters[i], nekudaPressed);
+                Avara avara = _avaraProvider.getAvara(letters[i], nekudaPressed);
+                await dialogScreen(context, avara.avara, avara.sound);
               }
             } else {
               wasNekudaPressed = false;
@@ -992,8 +1012,8 @@ class _WidgetAvarosState extends State<WidgetAvaros> {
           },
           child: Text(letters[i].ois,
               style: TextStyle(
-                fontFamily: "SBL",
-                fontSize: 60,
+                fontFamily: globalFontFamily,
+                fontSize: globalFontSize,
                 color: letterColors[colorIndex],
                 shadows: const [
                   Shadow(
@@ -1025,8 +1045,8 @@ class _WidgetAvarosState extends State<WidgetAvaros> {
           },
           child: Text(nekudos[i].nekuda,
               style: TextStyle(
-                fontFamily: "SBL",
-                fontSize: 60,
+                fontFamily: globalFontFamily,
+                fontSize: globalFontSize,
                 color: letterColors[colorIndex],
                 shadows: const [
                   Shadow(
@@ -1065,60 +1085,58 @@ class _WidgetAvarosState extends State<WidgetAvaros> {
       );
 
   }
-
-
-  /*
- * This functions actually shows a letter or avara
- */
-  Future dialogScreen(BuildContext context, Ois ois, Nekuda nekuda) async {
-
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          backgroundColor: globalColor,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  _avaraProvider.getAvara(ois, nekuda),
-                  style: const TextStyle(
-                    fontSize: 300,
-                    fontFamily: 'SBL',
-                    shadows: [
-                      Shadow(
-                        offset: Offset(5.0, 5.0),
-                        blurRadius: 10.0,
-                        color: Colors.black,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: FloatingActionButton(
-                    onPressed: () async {
-                      _avaraProvider.play(ois, nekuda);
-                    },
-                    child: const Icon(Icons.replay),
-                    backgroundColor: Colors.blue,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
 }
 
 
+/*
+ * This functions actually shows a letter or avara
+ */
+Future dialogScreen(BuildContext context, String text, String sound) async {
+
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return Dialog(
+        backgroundColor: globalColor,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                text,
+                style: const TextStyle(
+                  fontSize: 300,
+                  fontFamily: globalFontFamily,
+                  shadows: [
+                    Shadow(
+                      offset: Offset(5.0, 5.0),
+                      blurRadius: 10.0,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: FloatingActionButton(
+                  onPressed: () async {
+                    play(sound);
+                  },
+                  child: const Icon(Icons.replay),
+                  backgroundColor: Colors.blue,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}

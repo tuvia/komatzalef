@@ -42,6 +42,6 @@ class WidgetHei extends StatelessWidget {
     String spanish = "Cuando la letra HEI está al final de una palabra y tiene un DOGUESH adentro, tiene un sonido especial, como aire saliendo de la garganta.";
     String english = "When the letter HEI is at the end of a word and has a DOGESH inside, ha s aspecial sound, like air coming out of the throat.";
 
-    return buildWordsScreen(title, words, spanish: spanish, english: english);
+    return buildWordsScreen(context, title, words, spanish: spanish, english: english);
   }
 }

@@ -58,6 +58,6 @@ class WidgetJes extends StatelessWidget {
     String spanish = "Cuando la letra JES aparece con un PATOJ al comienzo o en medio de la palabra, suenan JA. Pero cuando aparecen al final de una palabra, suena AJ.";
     String english = "When the letter CHES appears with a PATOCH at the beginning or in the middle of a word, they sound CHA. But when appear at the end of a word, they sound ACH.";
 
-    return buildWordsScreen(title, words, spanish: spanish, english: english);
+    return buildWordsScreen(context, title, words, spanish: spanish, english: english);
   }
 }

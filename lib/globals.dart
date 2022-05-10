@@ -33,13 +33,6 @@ class ScreenDefinition {
 }
 
 
-enum LettersScreenType {
-  justLetters,
-  justNekudos,
-  lettersWithNekudos
-}
-
-
 /*
  * This two classes (Letter and Word) are used
  * in the Screen explaining the CHES and SHVO
@@ -82,7 +75,7 @@ Widget buildWordWidget(Word word) {
       child: BlinkText(
         word.word[i].letter,
         style: TextStyle(
-          fontFamily: "SBL",
+          fontFamily: globalFontFamily,
           fontSize: 60,
           color: word.word[i].color,
           shadows: const [
@@ -118,8 +111,8 @@ Widget getText(Letter letter) {
 
   return Text(letter.letter,
       style: TextStyle(
-        fontFamily: "SBL",
-        fontSize: 60,
+        fontFamily: globalFontFamily,
+        fontSize: globalFontSize,
         color: color,
         shadows: const [
           Shadow(
@@ -241,7 +234,7 @@ Widget buildScreenButtons(List<ScreenDefinition> screens) {
             style: TextStyle(
               color: screens[index].textColor,
               fontFamily: globalFontFamily,
-              fontSize: 70,
+              fontSize: globalFontSize,
               shadows: const [
                 Shadow(
                   offset: Offset(2.0, 2.0),
@@ -360,6 +353,7 @@ class WidgetHelpScreen extends StatelessWidget {
  */
 Widget buildNekudosTable() {
   const double fontSize = 40;
+  const TextStyle textStyle = TextStyle(fontSize: fontSize, fontFamily: globalFontFamily);
 
   return Padding(
     padding: const EdgeInsets.all(globalInset),
@@ -369,38 +363,38 @@ Widget buildNekudosTable() {
         children: const [
           TableRow(
               children: [
-                Text("תנועות גדולות", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize+5, fontFamily: "SBL"),),
-                Text("תנועות קטנות", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize+5, fontFamily: "SBL"),),
+                Text("תנועות גדולות", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize+5, fontFamily: globalFontFamily),),
+                Text("תנועות קטנות", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize+5, fontFamily: globalFontFamily),),
               ]
           ),
           TableRow(
               children: [
-                Text("אָ", textAlign: TextAlign.center, style: TextStyle(fontSize: fontSize, fontFamily: "SBL"),),
-                Text("אַ", textAlign: TextAlign.center, style: TextStyle(fontSize: fontSize, fontFamily: "SBL"),),
+                Text("אָ", textAlign: TextAlign.center, style: textStyle,),
+                Text("אַ", textAlign: TextAlign.center, style: textStyle,),
               ]
           ),
           TableRow(
               children: [
-                Text("אֵי", textAlign: TextAlign.center, style: TextStyle(fontSize: fontSize, fontFamily: "SBL"),),
-                Text("אֶ", textAlign: TextAlign.center, style: TextStyle(fontSize: fontSize, fontFamily: "SBL"),),
+                Text("אֵי", textAlign: TextAlign.center, style: textStyle,),
+                Text("אֶ", textAlign: TextAlign.center, style: textStyle,),
               ]
           ),
           TableRow(
               children: [
-                Text("אִי", textAlign: TextAlign.center, style: TextStyle(fontSize: fontSize, fontFamily: "SBL"),),
-                Text("אִ", textAlign: TextAlign.center, style: TextStyle(fontSize: fontSize, fontFamily: "SBL"),),
+                Text("אִי", textAlign: TextAlign.center, style: textStyle,),
+                Text("אִ", textAlign: TextAlign.center, style: textStyle,),
               ]
           ),
           TableRow(
               children: [
-                Text("אוֹ/אֹ", textAlign: TextAlign.center, style: TextStyle(fontSize: fontSize, fontFamily: "SBL"),),
-                Text("אָ", textAlign: TextAlign.center, style: TextStyle(fontSize: fontSize, fontFamily: "SBL"),),
+                Text("אוֹ/אֹ", textAlign: TextAlign.center, style: textStyle,),
+                Text("אָ", textAlign: TextAlign.center, style: textStyle,),
               ]
           ),
           TableRow(
               children: [
-                Text("אוּ", textAlign: TextAlign.center, style: TextStyle(fontSize: fontSize, fontFamily: "SBL"),),
-                Text("אֻ", textAlign: TextAlign.center, style: TextStyle(fontSize: fontSize, fontFamily: "SBL"),),
+                Text("אוּ", textAlign: TextAlign.center, style: textStyle,),
+                Text("אֻ", textAlign: TextAlign.center, style: textStyle,),
               ]
           ),
 

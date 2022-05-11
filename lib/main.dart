@@ -4,6 +4,7 @@ import 'package:komatzalef/letters.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
+import 'exer_letters.dart';
 import 'shvo.dart';
 import 'shema.dart';
 import 'jes.dart';
@@ -16,8 +17,9 @@ import 'globals.dart';
 const List<ScreenDefinition> screenList = [
 
   ScreenDefinition(
-      WidgetLettersNekudos(
+      WidgetLetters(
         title: "אבג",
+        type: LetterType.allLetters,
       ),
       "אבג",
       Colors.blue,
@@ -38,6 +40,14 @@ const List<ScreenDefinition> screenList = [
       "אָבָגָ",
       Colors.purple,
       Colors.deepOrange),
+
+  ScreenDefinition(
+      WidgetExerciseLetters(
+        title: "Exercise",
+      ),
+      "Exercise",
+      Colors.blue,
+      Colors.tealAccent),
 
   ScreenDefinition(
       WidgetJes(

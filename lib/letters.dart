@@ -33,6 +33,9 @@ class OisProvider extends ChangeNotifier {
   final List<Ois> letters = [];
   List<Ois> workingLetters = [];
   late AudioPlayer audioPlayer;
+  List<Ois> selectedLetters = [];
+  List<Ois> workingSelected = [];
+
 
 
   OisProvider() {
@@ -76,6 +79,51 @@ class OisProvider extends ChangeNotifier {
 
     workingLetters.addAll(letters);
   }
+
+  void select(Ois ois) {
+    selectedLetters.add(ois);
+    notifyListeners();
+  }
+
+  void unselect(Ois ois) {
+    selectedLetters.removeWhere((element) => element.ois == ois.ois);
+    notifyListeners();
+  }
+
+  void unselectAll() {
+    selectedLetters.clear();
+    notifyListeners();
+  }
+
+  int getSelectedCount() {
+    return selectedLetters.length;
+  }
+
+
+  List<Ois> getSelected(int count) {
+
+    workingSelected.clear();
+
+      // multiply the letters to show
+      for (int x = 0; x < selectedLetters.length; x++) {
+        for (int i = 0; i < count; i++) {
+          workingSelected.add(selectedLetters[x]);
+        }
+      }
+      workingSelected.shuffle();
+
+      return workingSelected;
+  }
+
+  bool isSelected(Ois ois) {
+    return selectedLetters.indexWhere((element) => element.ois == ois.ois) != -1 ? true : false;
+  }
+
+  void shuffleSelected() {
+    workingSelected.shuffle();
+    notifyListeners();
+  }
+
 
   List<Ois> get() {
     return workingLetters;
@@ -741,20 +789,25 @@ class NekudaProvider extends ChangeNotifier {
 
 
 
-
-
-
-
-class WidgetLettersNekudos extends StatefulWidget {
-  const WidgetLettersNekudos({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<WidgetLettersNekudos> createState() => _WidgetLettersNekudosState();
+enum LetterType {
+  allLetters,
+  someLetters,
 }
 
-class _WidgetLettersNekudosState extends State<WidgetLettersNekudos> {
+
+
+class WidgetLetters extends StatefulWidget {
+  const WidgetLetters({Key? key, required this.title, required this.type, this.repetition = 1}) : super(key: key);
+
+  final String title;
+  final LetterType type;
+  final int repetition;
+
+  @override
+  State<WidgetLetters> createState() => _WidgetLettersState();
+}
+
+class _WidgetLettersState extends State<WidgetLetters> {
   
   
   @override
@@ -766,7 +819,18 @@ class _WidgetLettersNekudosState extends State<WidgetLettersNekudos> {
       backgroundColor: globalColor,
       appBar: buildAppBar(context, widget.title),
       body: Consumer<OisProvider>(builder: (context, oisProvider, child) {
-        List _list = oisProvider.get();
+
+        List _list = [];
+
+        switch (widget.type) {
+          case LetterType.allLetters:
+            _list = oisProvider.get();
+            break;
+
+          case LetterType.someLetters:
+            _list = oisProvider.getSelected(widget.repetition);
+            break;
+        }
 
         List<Widget> wl = [];
         for (int i = 0; i < _list.length; i++) {
@@ -783,27 +847,46 @@ class _WidgetLettersNekudosState extends State<WidgetLettersNekudos> {
       }),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-              backgroundColor: Colors.red,
-              onPressed: () {
-                _oisProvider.shuffle();
-              },
-              heroTag: 0,
-              child: const Icon(Icons.shuffle)),
-          const SizedBox(width: 10),
-          FloatingActionButton(
-              backgroundColor: Colors.blue,
-              onPressed: () {
-                _oisProvider.arrange();
-              },
-              heroTag: 1,
-              child: const Icon(Icons.straight)),
-        ],
+        children: buildFloatingBar(_oisProvider),
       ),
     );
   }
 
+
+
+  List<Widget> buildFloatingBar(OisProvider oisProvider) {
+    List<Widget> wl = [];
+
+    wl.add(FloatingActionButton(
+        backgroundColor: Colors.red,
+        onPressed: () {
+          switch (widget.type) {
+            case LetterType.allLetters:
+              oisProvider.shuffle();
+              break;
+
+            case LetterType.someLetters:
+              oisProvider.shuffleSelected();
+              break;
+          }
+        },
+        heroTag: 0,
+        child: const Icon(Icons.shuffle)));
+
+    wl.add(const SizedBox(width: 10));
+
+    if (widget.type == LetterType.allLetters) {
+      wl.add(FloatingActionButton(
+          backgroundColor: Colors.blue,
+          onPressed: () {
+            oisProvider.arrange();
+          },
+          heroTag: 1,
+          child: const Icon(Icons.straight)));
+    }
+
+    return wl;
+  }
 
 
   Widget buildOis(OisProvider oisProvider, Ois ois) {

@@ -153,7 +153,10 @@ Widget buildDescriptions({required String english, required String spanish}) {
         ],
       )));
 
-  return Column(children: wl);
+  return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: wl);
 }
 
 

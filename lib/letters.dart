@@ -90,9 +90,11 @@ class OisProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void unselectAll() {
+  void unselectAll({bool notify = true}) {
     selectedLetters.clear();
-    notifyListeners();
+    if (notify) {
+      notifyListeners();
+    }
   }
 
   int getSelectedCount() {
@@ -214,6 +216,62 @@ class AvaraProvider extends ChangeNotifier {
   final List<Avara> jirik = [];
 
   List<Avara> workingAvara = [];
+  List<Avara> selectedLetters = [];
+  List<Avara> workingSelected = [];
+
+
+
+
+
+  void select(Avara avara) {
+    selectedLetters.add(avara);
+    notifyListeners();
+  }
+
+  void unselect(Avara avara) {
+    selectedLetters.removeWhere((element) => element.avara == avara.avara);
+    notifyListeners();
+  }
+
+  void unselectAll() {
+    selectedLetters.clear();
+    notifyListeners();
+  }
+
+  int getSelectedCount() {
+    return selectedLetters.length;
+  }
+
+
+  List<Avara> getSelected(int count) {
+
+    workingSelected.clear();
+
+    // multiply the letters to show
+    for (int x = 0; x < selectedLetters.length; x++) {
+      for (int i = 0; i < count; i++) {
+        workingSelected.add(selectedLetters[x]);
+      }
+    }
+    workingSelected.shuffle();
+
+    return workingSelected;
+  }
+
+  bool isSelected(Avara avara) {
+    return selectedLetters.indexWhere((element) => element.avara == avara.avara) != -1 ? true : false;
+  }
+
+  void shuffleSelected() {
+    workingSelected.shuffle();
+    notifyListeners();
+  }
+
+
+  void playSound(Avara avara) async {
+    await audioPlayer.setAsset("audios/" + avara.sound);
+    await audioPlayer.play();
+  }
 
 
   void play(Ois ois, Nekuda nekuda) async {
@@ -221,7 +279,7 @@ class AvaraProvider extends ChangeNotifier {
     // build avara string
     String n = nekuda.sound.substring(1, 3);
 
-    // kubutz ans shuruk, joilom molei and joilom sound the same!!
+    // kubutz and shuruk, joilom molei and joilom sound the same!!
     if (n == "09") {
       n = "05";
     } else if (n == "04") {
@@ -233,6 +291,8 @@ class AvaraProvider extends ChangeNotifier {
     await audioPlayer.play();
   }
 
+
+
   @override
   void dispose() {
     audioPlayer.dispose();
@@ -240,83 +300,83 @@ class AvaraProvider extends ChangeNotifier {
   }
 
 
+
+
   List<Avara> get(Avaros avara) {
+    workingAvara.clear();
+
     switch (avara) {
       case Avaros.nekudaKomatz:
-        workingAvara = komatz;
+        workingAvara.addAll( komatz);
         break;
-
       case Avaros.nekudaJirik:
-        workingAvara = jirik;
+        workingAvara.addAll( jirik);
         break;
-
       case Avaros.nekudaJoilom:
-        workingAvara = joilom;
+        workingAvara.addAll( joilom);
         break;
-
       case Avaros.nekudaJoilomMole:
-        workingAvara = joilomMole;
+        workingAvara.addAll( joilomMole);
         break;
-
       case Avaros.nekudaKubutz:
-        workingAvara = kubutz;
+        workingAvara.addAll( kubutz);
         break;
-
       case Avaros.nekudaPataj:
-        workingAvara = pataj;
+        workingAvara.addAll( pataj);
         break;
-
       case Avaros.nekudaTzeire:
-        workingAvara = tzeire;
+        workingAvara.addAll( tzeire);
         break;
-
       case Avaros.nekudaSegol:
-        workingAvara = segol;
+        workingAvara.addAll( segol);
         break;
-
       case Avaros.nekudaShuruk:
-        workingAvara = shuruk;
+        workingAvara.addAll( shuruk);
         break;
     }
 
     return workingAvara;
   }
 
+
+
   void shuffle(Avaros avara) {
+    workingAvara.clear();
+
     switch (avara) {
       case Avaros.nekudaKomatz:
-        workingAvara = komatz;
+        workingAvara.addAll(komatz);
         break;
       case Avaros.nekudaJirik:
-        workingAvara = jirik;
+        workingAvara.addAll(jirik);
         break;
 
       case Avaros.nekudaJoilom:
-        workingAvara = joilom;
+        workingAvara.addAll(joilom);
         break;
 
       case Avaros.nekudaJoilomMole:
-        workingAvara = joilomMole;
+        workingAvara.addAll(joilomMole);
         break;
 
       case Avaros.nekudaKubutz:
-        workingAvara = kubutz;
+        workingAvara.addAll(kubutz);
         break;
 
       case Avaros.nekudaPataj:
-        workingAvara = pataj;
+        workingAvara.addAll(pataj);
         break;
 
       case Avaros.nekudaTzeire:
-        workingAvara = tzeire;
+        workingAvara.addAll(tzeire);
         break;
 
       case Avaros.nekudaSegol:
-        workingAvara = segol;
+        workingAvara.addAll(segol);
         break;
 
       case Avaros.nekudaShuruk:
-        workingAvara = shuruk;
+        workingAvara.addAll(shuruk);
         break;
     }
 
@@ -324,46 +384,52 @@ class AvaraProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
   void arrange(Avaros avara) {
+    workingAvara.clear();
+
     switch (avara) {
       case Avaros.nekudaKomatz:
-        workingAvara = komatz;
+        workingAvara.addAll(komatz);
         break;
       case Avaros.nekudaJirik:
-        workingAvara = jirik;
+        workingAvara.addAll(jirik);
         break;
 
       case Avaros.nekudaJoilom:
-        workingAvara = joilom;
+        workingAvara.addAll(joilom);
         break;
 
       case Avaros.nekudaJoilomMole:
-        workingAvara = joilomMole;
+        workingAvara.addAll(joilomMole);
         break;
 
       case Avaros.nekudaKubutz:
-        workingAvara = kubutz;
+        workingAvara.addAll(kubutz);
         break;
 
       case Avaros.nekudaPataj:
-        workingAvara = pataj;
+        workingAvara.addAll(pataj);
         break;
 
       case Avaros.nekudaTzeire:
-        workingAvara = tzeire;
+        workingAvara.addAll(tzeire);
         break;
 
       case Avaros.nekudaSegol:
-        workingAvara = segol;
+        workingAvara.addAll(segol);
         break;
 
       case Avaros.nekudaShuruk:
-        workingAvara = shuruk;
+        workingAvara.addAll(shuruk);
         break;
     }
 
     notifyListeners();
   }
+
+
+
 
   AvaraProvider() {
     komatz.add(Avara('אָ', nekudaKomatz + "00"));
@@ -383,16 +449,13 @@ class AvaraProvider extends ChangeNotifier {
     komatz.add(Avara('ךָּ', nekudaKomatz + "32"));
     komatz.add(Avara('לָ', nekudaKomatz + "14"));
     komatz.add(Avara('מָ', nekudaKomatz + "15"));
-    komatz.add(Avara('ם', nekudaKomatz + "16"));
     komatz.add(Avara('נָ', nekudaKomatz + "17"));
-    komatz.add(Avara('ן', nekudaKomatz + "18"));
+    komatz.add(Avara('ןָ', nekudaKomatz + "17"));
     komatz.add(Avara('סָ', nekudaKomatz + "19"));
     komatz.add(Avara('עָ', nekudaKomatz + "20"));
     komatz.add(Avara('פָּ', nekudaKomatz + "21"));
     komatz.add(Avara('פָ', nekudaKomatz + "22"));
-    komatz.add(Avara('ף', nekudaKomatz + "23"));
     komatz.add(Avara('צָ', nekudaKomatz + "24"));
-    komatz.add(Avara('ץ', nekudaKomatz + "25"));
     komatz.add(Avara('קָ', nekudaKomatz + "26"));
     komatz.add(Avara('רָ', nekudaKomatz + "27"));
     komatz.add(Avara('שָׁ', nekudaKomatz + "28"));
@@ -413,20 +476,15 @@ class AvaraProvider extends ChangeNotifier {
     pataj.add(Avara('יַ', nekudaPataj + "10"));
     pataj.add(Avara('כַּ', nekudaPataj + "11"));
     pataj.add(Avara('כַ', nekudaPataj + "12"));
-    pataj.add(Avara('ך', nekudaPataj + "13"));
-    pataj.add(Avara('ךּ', nekudaPataj + "32"));
     pataj.add(Avara('לַ', nekudaPataj + "14"));
     pataj.add(Avara('מַ', nekudaPataj + "15"));
-    pataj.add(Avara('ם', nekudaPataj + "16"));
     pataj.add(Avara('נַ', nekudaPataj + "17"));
-    pataj.add(Avara('ןַ', nekudaPataj + "18"));
+    pataj.add(Avara('ןַ', nekudaPataj + "17"));
     pataj.add(Avara('סַ', nekudaPataj + "19"));
     pataj.add(Avara('עַ', nekudaPataj + "20"));
     pataj.add(Avara('פַּ', nekudaPataj + "21"));
     pataj.add(Avara('פַ', nekudaPataj + "22"));
-    pataj.add(Avara('ף', nekudaPataj + "23"));
     pataj.add(Avara('צַ', nekudaPataj + "24"));
-    pataj.add(Avara('ץ', nekudaPataj + "25"));
     pataj.add(Avara('קַ', nekudaPataj + "26"));
     pataj.add(Avara('רַ', nekudaPataj + "27"));
     pataj.add(Avara('שַׁ', nekudaPataj + "28"));
@@ -447,20 +505,14 @@ class AvaraProvider extends ChangeNotifier {
     segol.add(Avara('יֶ', nekudaSegol + "10"));
     segol.add(Avara('כֶּ', nekudaSegol + "11"));
     segol.add(Avara('כֶ', nekudaSegol + "12"));
-    segol.add(Avara('ך', nekudaSegol + "13"));
-    segol.add(Avara('ךּ', nekudaSegol + "32"));
     segol.add(Avara('לֶ', nekudaSegol + "14"));
     segol.add(Avara('מֶ', nekudaSegol + "15"));
-    segol.add(Avara('ם', nekudaSegol + "16"));
     segol.add(Avara('נֶ', nekudaSegol + "17"));
-    segol.add(Avara('ן', nekudaSegol + "18"));
     segol.add(Avara('סֶ', nekudaSegol + "19"));
     segol.add(Avara('עֶ', nekudaSegol + "20"));
     segol.add(Avara('פֶּ', nekudaSegol + "21"));
     segol.add(Avara('פֶ', nekudaSegol + "22"));
-    segol.add(Avara('ף', nekudaSegol + "23"));
     segol.add(Avara('צֶ', nekudaSegol + "24"));
-    segol.add(Avara('ץ', nekudaSegol + "25"));
     segol.add(Avara('קֶ', nekudaSegol + "26"));
     segol.add(Avara('רֶ', nekudaSegol + "27"));
     segol.add(Avara('שֶׁ', nekudaSegol + "28"));
@@ -481,20 +533,14 @@ class AvaraProvider extends ChangeNotifier {
     tzeire.add(Avara('יֵ', nekudaTzeire + "10"));
     tzeire.add(Avara('כֵּ', nekudaTzeire + "11"));
     tzeire.add(Avara('כֵ', nekudaTzeire + "12"));
-    tzeire.add(Avara('ך', nekudaTzeire + "13"));
-    tzeire.add(Avara('ךּ', nekudaTzeire + "32"));
     tzeire.add(Avara('לֵ', nekudaTzeire + "14"));
     tzeire.add(Avara('מֵ', nekudaTzeire + "15"));
-    tzeire.add(Avara('ם', nekudaTzeire + "16"));
     tzeire.add(Avara('נֵ', nekudaTzeire + "17"));
-    tzeire.add(Avara('ן', nekudaTzeire + "18"));
     tzeire.add(Avara('סֵ', nekudaTzeire + "19"));
     tzeire.add(Avara('עֵ', nekudaTzeire + "20"));
     tzeire.add(Avara('פֵּ', nekudaTzeire + "21"));
     tzeire.add(Avara('פֵ', nekudaTzeire + "22"));
-    tzeire.add(Avara('ף', nekudaTzeire + "23"));
     tzeire.add(Avara('צֵ', nekudaTzeire + "24"));
-    tzeire.add(Avara('ץ', nekudaTzeire + "25"));
     tzeire.add(Avara('קֵ', nekudaTzeire + "26"));
     tzeire.add(Avara('רֵ', nekudaTzeire + "27"));
     tzeire.add(Avara('שֵׁ', nekudaTzeire + "28"));
@@ -515,20 +561,14 @@ class AvaraProvider extends ChangeNotifier {
     shuruk.add(Avara('יוּ', nekudaShuruk + "10"));
     shuruk.add(Avara('כּוּ', nekudaShuruk + "11"));
     shuruk.add(Avara('כוּ', nekudaShuruk + "12"));
-    shuruk.add(Avara('ך', nekudaShuruk + "13"));
-    shuruk.add(Avara('ךּ', nekudaShuruk + "32"));
     shuruk.add(Avara('לוּ', nekudaShuruk + "14"));
     shuruk.add(Avara('מוּ', nekudaShuruk + "15"));
-    shuruk.add(Avara('ם', nekudaShuruk + "16"));
     shuruk.add(Avara('נוּ', nekudaShuruk + "17"));
-    shuruk.add(Avara('ן', nekudaShuruk + "18"));
     shuruk.add(Avara('סוּ', nekudaShuruk + "19"));
     shuruk.add(Avara('עוּ', nekudaShuruk + "20"));
     shuruk.add(Avara('פּוּ', nekudaShuruk + "21"));
     shuruk.add(Avara('פוּ', nekudaShuruk + "22"));
-    shuruk.add(Avara('ף', nekudaShuruk + "23"));
     shuruk.add(Avara('צוּ', nekudaShuruk + "24"));
-    shuruk.add(Avara('ץ', nekudaShuruk + "25"));
     shuruk.add(Avara('קוּ', nekudaShuruk + "26"));
     shuruk.add(Avara('רוּ', nekudaShuruk + "27"));
     shuruk.add(Avara('שׁוּ', nekudaShuruk + "28"));
@@ -536,39 +576,33 @@ class AvaraProvider extends ChangeNotifier {
     shuruk.add(Avara('תוּ', nekudaShuruk + "31"));
     shuruk.add(Avara('תּוּ', nekudaShuruk + "30"));
 
-    kubutz.add(Avara('אֻ', nekudaKubutz + "00"));
-    kubutz.add(Avara('בֻּ', nekudaKubutz + "01"));
-    kubutz.add(Avara('בֻ', nekudaKubutz + "02"));
-    kubutz.add(Avara('גֻ', nekudaKubutz + "03"));
-    kubutz.add(Avara('דֻ', nekudaKubutz + "04"));
-    kubutz.add(Avara('הֻ', nekudaKubutz + "05"));
-    kubutz.add(Avara('וֻ', nekudaKubutz + "06"));
-    kubutz.add(Avara('זֻ', nekudaKubutz + "07"));
-    kubutz.add(Avara('חֻ', nekudaKubutz + "08"));
-    kubutz.add(Avara('טֻ', nekudaKubutz + "09"));
-    kubutz.add(Avara('יֻ', nekudaKubutz + "10"));
-    kubutz.add(Avara('כֻּ', nekudaKubutz + "11"));
-    kubutz.add(Avara('כֻ', nekudaKubutz + "12"));
-    kubutz.add(Avara('ך', nekudaKubutz + "13"));
-    kubutz.add(Avara('ךּ', nekudaKubutz + "32"));
-    kubutz.add(Avara('לֻ', nekudaKubutz + "14"));
-    kubutz.add(Avara('מֻ', nekudaKubutz + "15"));
-    kubutz.add(Avara('ם', nekudaKubutz + "16"));
-    kubutz.add(Avara('נֻ', nekudaKubutz + "17"));
-    kubutz.add(Avara('ן', nekudaKubutz + "18"));
-    kubutz.add(Avara('סֻ', nekudaKubutz + "19"));
-    kubutz.add(Avara('עֻ', nekudaKubutz + "20"));
-    kubutz.add(Avara('פֻּ', nekudaKubutz + "21"));
-    kubutz.add(Avara('פֻ', nekudaKubutz + "22"));
-    kubutz.add(Avara('ף', nekudaKubutz + "23"));
-    kubutz.add(Avara('צֻ', nekudaKubutz + "24"));
-    kubutz.add(Avara('ץ', nekudaKubutz + "25"));
-    kubutz.add(Avara('קֻ', nekudaKubutz + "26"));
-    kubutz.add(Avara('רֻ', nekudaKubutz + "27"));
-    kubutz.add(Avara('שֻׁ', nekudaKubutz + "28"));
-    kubutz.add(Avara('שֻׂ', nekudaKubutz + "29"));
-    kubutz.add(Avara('תֻ', nekudaKubutz + "31"));
-    kubutz.add(Avara('תֻּ', nekudaKubutz + "30"));
+    kubutz.add(Avara('אֻ', nekudaShuruk + "00"));
+    kubutz.add(Avara('בֻּ', nekudaShuruk + "01"));
+    kubutz.add(Avara('בֻ', nekudaShuruk + "02"));
+    kubutz.add(Avara('גֻ', nekudaShuruk + "03"));
+    kubutz.add(Avara('דֻ', nekudaShuruk + "04"));
+    kubutz.add(Avara('הֻ', nekudaShuruk + "05"));
+    kubutz.add(Avara('וֻ', nekudaShuruk + "02"));
+    kubutz.add(Avara('זֻ', nekudaShuruk + "07"));
+    kubutz.add(Avara('חֻ', nekudaShuruk + "08"));
+    kubutz.add(Avara('טֻ', nekudaShuruk + "09"));
+    kubutz.add(Avara('יֻ', nekudaShuruk + "10"));
+    kubutz.add(Avara('כֻּ', nekudaShuruk + "11"));
+    kubutz.add(Avara('כֻ', nekudaShuruk + "12"));
+    kubutz.add(Avara('לֻ', nekudaShuruk + "14"));
+    kubutz.add(Avara('מֻ', nekudaShuruk + "15"));
+    kubutz.add(Avara('נֻ', nekudaShuruk + "17"));
+    kubutz.add(Avara('סֻ', nekudaShuruk + "19"));
+    kubutz.add(Avara('עֻ', nekudaShuruk + "20"));
+    kubutz.add(Avara('פֻּ', nekudaShuruk + "21"));
+    kubutz.add(Avara('פֻ', nekudaShuruk + "22"));
+    kubutz.add(Avara('צֻ', nekudaShuruk + "24"));
+    kubutz.add(Avara('קֻ', nekudaShuruk + "26"));
+    kubutz.add(Avara('רֻ', nekudaShuruk + "27"));
+    kubutz.add(Avara('שֻׁ', nekudaShuruk + "28"));
+    kubutz.add(Avara('שֻׂ', nekudaShuruk + "29"));
+    kubutz.add(Avara('תֻ', nekudaShuruk + "31"));
+    kubutz.add(Avara('תֻּ', nekudaShuruk + "30"));
 
     joilom.add(Avara('אֹ', nekudaJoilom + "00"));
     joilom.add(Avara('בֹּ', nekudaJoilom + "01"));
@@ -583,20 +617,14 @@ class AvaraProvider extends ChangeNotifier {
     joilom.add(Avara('יֹ', nekudaJoilom + "10"));
     joilom.add(Avara('כֹּ', nekudaJoilom + "11"));
     joilom.add(Avara('כֹ', nekudaJoilom + "12"));
-    joilom.add(Avara('ך', nekudaJoilom + "13"));
-    joilom.add(Avara('ךּ', nekudaJoilom + "32"));
     joilom.add(Avara('לֹ', nekudaJoilom + "14"));
     joilom.add(Avara('מֹ', nekudaJoilom + "15"));
-    joilom.add(Avara('ם', nekudaJoilom + "16"));
     joilom.add(Avara('נֹ', nekudaJoilom + "17"));
-    joilom.add(Avara('ן', nekudaJoilom + "18"));
     joilom.add(Avara('סֹ', nekudaJoilom + "19"));
     joilom.add(Avara('עֹ', nekudaJoilom + "20"));
     joilom.add(Avara('פֹּ', nekudaJoilom + "21"));
     joilom.add(Avara('פֹ', nekudaJoilom + "22"));
-    joilom.add(Avara('ף', nekudaJoilom + "23"));
     joilom.add(Avara('צֹ', nekudaJoilom + "24"));
-    joilom.add(Avara('ץ', nekudaJoilom + "25"));
     joilom.add(Avara('קֹ', nekudaJoilom + "26"));
     joilom.add(Avara('רֹ', nekudaJoilom + "27"));
     joilom.add(Avara('שֹׁ', nekudaJoilom + "28"));
@@ -604,39 +632,33 @@ class AvaraProvider extends ChangeNotifier {
     joilom.add(Avara('תֹ', nekudaJoilom + "31"));
     joilom.add(Avara('תֹּ', nekudaJoilom + "30"));
 
-    joilomMole.add(Avara('אוֹ', nekudaJoilomMole + "00"));
-    joilomMole.add(Avara('בּוֹ', nekudaJoilomMole + "01"));
-    joilomMole.add(Avara('בוֹ', nekudaJoilomMole + "02"));
-    joilomMole.add(Avara('גוֹ', nekudaJoilomMole + "03"));
-    joilomMole.add(Avara('דוֹ', nekudaJoilomMole + "04"));
-    joilomMole.add(Avara('הוֹ', nekudaJoilomMole + "05"));
-    joilomMole.add(Avara('וֹ', nekudaJoilomMole + "06"));
-    joilomMole.add(Avara('זוֹ', nekudaJoilomMole + "07"));
-    joilomMole.add(Avara('חוֹ', nekudaJoilomMole + "08"));
-    joilomMole.add(Avara('טוֹ', nekudaJoilomMole + "09"));
-    joilomMole.add(Avara('יוֹ', nekudaJoilomMole + "10"));
-    joilomMole.add(Avara('כּוֹ', nekudaJoilomMole + "11"));
-    joilomMole.add(Avara('כוֹ', nekudaJoilomMole + "12"));
-    joilomMole.add(Avara('ך', nekudaJoilomMole + "13"));
-    joilomMole.add(Avara('ךּ', nekudaJoilomMole + "32"));
-    joilomMole.add(Avara('לוֹ', nekudaJoilomMole + "14"));
-    joilomMole.add(Avara('מוֹ', nekudaJoilomMole + "15"));
-    joilomMole.add(Avara('ם', nekudaJoilomMole + "16"));
-    joilomMole.add(Avara('נוֹ', nekudaJoilomMole + "17"));
-    joilomMole.add(Avara('ן', nekudaJoilomMole + "18"));
-    joilomMole.add(Avara('סוֹ', nekudaJoilomMole + "19"));
-    joilomMole.add(Avara('עוֹ', nekudaJoilomMole + "20"));
-    joilomMole.add(Avara('פּוֹ', nekudaJoilomMole + "21"));
-    joilomMole.add(Avara('פוֹ', nekudaJoilomMole + "22"));
-    joilomMole.add(Avara('ף', nekudaJoilomMole + "23"));
-    joilomMole.add(Avara('צוֹ', nekudaJoilomMole + "24"));
-    joilomMole.add(Avara('ץ', nekudaJoilomMole + "25"));
-    joilomMole.add(Avara('קוֹ', nekudaJoilomMole + "26"));
-    joilomMole.add(Avara('רוֹ', nekudaJoilomMole + "27"));
-    joilomMole.add(Avara('שׁוֹ', nekudaJoilomMole + "28"));
-    joilomMole.add(Avara('שׂוֹ', nekudaJoilomMole + "29"));
-    joilomMole.add(Avara('תוֹ', nekudaJoilomMole + "31"));
-    joilomMole.add(Avara('תּוֹ', nekudaJoilomMole + "30"));
+    joilomMole.add(Avara('אוֹ', nekudaJoilom + "00"));
+    joilomMole.add(Avara('בּוֹ', nekudaJoilom + "01"));
+    joilomMole.add(Avara('בוֹ', nekudaJoilom + "02"));
+    joilomMole.add(Avara('גוֹ', nekudaJoilom + "03"));
+    joilomMole.add(Avara('דוֹ', nekudaJoilom + "04"));
+    joilomMole.add(Avara('הוֹ', nekudaJoilom + "05"));
+    joilomMole.add(Avara('ווֹ', nekudaJoilom + "02"));
+    joilomMole.add(Avara('זוֹ', nekudaJoilom + "07"));
+    joilomMole.add(Avara('חוֹ', nekudaJoilom + "08"));
+    joilomMole.add(Avara('טוֹ', nekudaJoilom + "09"));
+    joilomMole.add(Avara('יוֹ', nekudaJoilom + "10"));
+    joilomMole.add(Avara('כּוֹ', nekudaJoilom + "11"));
+    joilomMole.add(Avara('כוֹ', nekudaJoilom + "12"));
+    joilomMole.add(Avara('לוֹ', nekudaJoilom + "14"));
+    joilomMole.add(Avara('מוֹ', nekudaJoilom + "15"));
+    joilomMole.add(Avara('נוֹ', nekudaJoilom + "17"));
+    joilomMole.add(Avara('סוֹ', nekudaJoilom + "19"));
+    joilomMole.add(Avara('עוֹ', nekudaJoilom + "20"));
+    joilomMole.add(Avara('פּוֹ', nekudaJoilom + "21"));
+    joilomMole.add(Avara('פוֹ', nekudaJoilom + "22"));
+    joilomMole.add(Avara('צוֹ', nekudaJoilom + "24"));
+    joilomMole.add(Avara('קוֹ', nekudaJoilom + "26"));
+    joilomMole.add(Avara('רוֹ', nekudaJoilom + "27"));
+    joilomMole.add(Avara('שׁוֹ', nekudaJoilom + "28"));
+    joilomMole.add(Avara('שׂוֹ', nekudaJoilom + "29"));
+    joilomMole.add(Avara('תוֹ', nekudaJoilom + "31"));
+    joilomMole.add(Avara('תּוֹ', nekudaJoilom + "30"));
 
     jirik.add(Avara('אִ', nekudaJirik + "00"));
     jirik.add(Avara('בִּ', nekudaJirik + "01"));
@@ -644,27 +666,21 @@ class AvaraProvider extends ChangeNotifier {
     jirik.add(Avara('גִ', nekudaJirik + "03"));
     jirik.add(Avara('דִ', nekudaJirik + "04"));
     jirik.add(Avara('הִ', nekudaJirik + "05"));
-    jirik.add(Avara('וִ', nekudaJirik + "06"));
+    jirik.add(Avara('וִ', nekudaJirik + "02"));
     jirik.add(Avara('זִ', nekudaJirik + "07"));
     jirik.add(Avara('חִ', nekudaJirik + "08"));
     jirik.add(Avara('טִ', nekudaJirik + "09"));
     jirik.add(Avara('יִ', nekudaJirik + "10"));
     jirik.add(Avara('כִּ', nekudaJirik + "11"));
     jirik.add(Avara('כִ', nekudaJirik + "12"));
-    jirik.add(Avara('ך', nekudaJirik + "13"));
-    jirik.add(Avara('ךּ', nekudaJirik + "32"));
     jirik.add(Avara('לִ', nekudaJirik + "14"));
     jirik.add(Avara('מִ', nekudaJirik + "15"));
-    jirik.add(Avara('ם', nekudaJirik + "16"));
     jirik.add(Avara('נִ', nekudaJirik + "17"));
-    jirik.add(Avara('ן', nekudaJirik + "18"));
     jirik.add(Avara('סִ', nekudaJirik + "19"));
     jirik.add(Avara('עִ', nekudaJirik + "20"));
     jirik.add(Avara('פִּ', nekudaJirik + "21"));
     jirik.add(Avara('פִ', nekudaJirik + "22"));
-    jirik.add(Avara('ף', nekudaJirik + "23"));
     jirik.add(Avara('צִ', nekudaJirik + "24"));
-    jirik.add(Avara('ץ', nekudaJirik + "25"));
     jirik.add(Avara('קִ', nekudaJirik + "26"));
     jirik.add(Avara('רִ', nekudaJirik + "27"));
     jirik.add(Avara('שִׁ', nekudaJirik + "28"));
@@ -674,6 +690,8 @@ class AvaraProvider extends ChangeNotifier {
 
     workingAvara.addAll(komatz);
   }
+
+
 
   List<Avara> _getAvaraList(Nekuda nekuda) {
     String n = nekuda.sound.substring(1, 3);
@@ -702,6 +720,10 @@ class AvaraProvider extends ChangeNotifier {
     return komatz;
   }
 
+
+  void clearSelected() {
+    selectedLetters.clear();
+  }
 
 
   Avara getAvara(Ois ois, Nekuda nekuda) {
@@ -838,11 +860,13 @@ class _WidgetLettersState extends State<WidgetLetters> {
         }
 
         return SingleChildScrollView(
-            child: Wrap(
-              textDirection: TextDirection.rtl,
-              alignment: WrapAlignment.center,
-              children: wl,
+            child: Center(
+              child: Wrap(
+                textDirection: TextDirection.rtl,
+                alignment: WrapAlignment.center,
+                children: wl,
           ),
+            ),
         );
       }),
       floatingActionButton: Row(
@@ -1018,6 +1042,7 @@ class _WidgetNekudosState extends State<WidgetNekudos> {
 
 
 
+
 class WidgetAvaros extends StatefulWidget {
   const WidgetAvaros({Key? key, required this.title}) : super(key: key);
 
@@ -1147,24 +1172,33 @@ class _WidgetAvarosState extends State<WidgetAvaros> {
         }
       }
 
+      wl2.add(const SizedBox(height: 20,));
 
-      return SingleChildScrollView(
-        child: Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Wrap(
-        textDirection: TextDirection.rtl,
-          alignment: WrapAlignment.center,
-          children: wl1,
-        ),
-              const SizedBox(height: 10,),
-              Wrap(
-                textDirection: TextDirection.rtl,
-                alignment: WrapAlignment.center,
-                children: wl2,
-              ),
-            ]),
+      return Center(
+        child: SingleChildScrollView(
+          child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Wrap(
+                      spacing: 20,
+                      runSpacing: 20,
+                      textDirection: TextDirection.rtl,
+                      alignment: WrapAlignment.center,
+              children: wl1,
+            ),
+
+                  const SizedBox(height: 10,),
+                  Wrap(
+                      spacing: 20,
+                      runSpacing: 20,
+                      textDirection: TextDirection.rtl,
+                      alignment: WrapAlignment.center,
+                      children: wl2,
+                    ),
+
+                ]),
+          ),
       );
 
   }
@@ -1223,3 +1257,148 @@ Future dialogScreen(BuildContext context, String text, String sound) async {
     },
   );
 }
+
+
+
+
+
+
+enum AvaraType {
+  allAvaros,
+  someAvaros,
+}
+
+
+
+class WidgetAvarosExercise extends StatefulWidget {
+  const WidgetAvarosExercise({Key? key, required this.title, required this.type, this.repetition = 1, this.avara = Avaros.nekudaKomatz}) : super(key: key);
+
+  final String title;
+  final AvaraType type;
+  final int repetition;
+  final Avaros avara;
+
+  @override
+  State<WidgetAvarosExercise> createState() => _WidgetAvarosExerciseState();
+}
+
+class _WidgetAvarosExerciseState extends State<WidgetAvarosExercise> {
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    AvaraProvider _avaraProvider = Provider.of<AvaraProvider>(context, listen: false);
+
+    return Scaffold(
+      backgroundColor: globalColor,
+      appBar: buildAppBar(context, widget.title),
+      body: Consumer<AvaraProvider>(builder: (context, avaraProvider, child) {
+
+        List _list = [];
+
+        switch (widget.type) {
+          case AvaraType.allAvaros:
+            _list = avaraProvider.get(widget.avara);
+            break;
+
+          case AvaraType.someAvaros:
+            _list = avaraProvider.getSelected(widget.repetition);
+            break;
+        }
+
+        List<Widget> wl = [];
+        for (int i = 0; i < _list.length; i++) {
+          wl.add(buildAvara(avaraProvider, _list[i]));
+        }
+
+        return SingleChildScrollView(
+          child: Center(
+            child: Wrap(
+              spacing: 20,
+              runSpacing: 20,
+              textDirection: TextDirection.rtl,
+              alignment: WrapAlignment.center,
+              children: wl,
+            ),
+          ),
+        );
+      }),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: buildFloatingBar(_avaraProvider),
+      ),
+    );
+  }
+
+
+
+  List<Widget> buildFloatingBar(AvaraProvider avaraProvider) {
+    List<Widget> wl = [];
+
+    wl.add(FloatingActionButton(
+        backgroundColor: Colors.red,
+        onPressed: () {
+          switch (widget.type) {
+            case AvaraType.allAvaros:
+              avaraProvider.shuffle(widget.avara);
+              break;
+
+            case AvaraType.someAvaros:
+              avaraProvider.shuffleSelected();
+              break;
+          }
+        },
+        heroTag: 0,
+        child: const Icon(Icons.shuffle)));
+
+    wl.add(const SizedBox(width: 10));
+
+    if (widget.type == AvaraType.allAvaros) {
+      wl.add(FloatingActionButton(
+          backgroundColor: Colors.blue,
+          onPressed: () {
+            avaraProvider.arrange(widget.avara);
+          },
+          heroTag: 1,
+          child: const Icon(Icons.straight)));
+    }
+
+    return wl;
+  }
+
+
+  Widget buildAvara(AvaraProvider avaraProvider, Avara avara) {
+// change the colors of the letters
+    colorIndex++;
+    if (colorIndex >= letterColors.length) {
+      colorIndex = 0;
+    }
+
+    return TextButton(
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.zero,
+      ),
+      onPressed: () async {
+        avaraProvider.playSound(avara);
+        await dialogScreen(context, avara.avara, avara.sound);
+      },
+      child: Text(avara.avara,
+          style: TextStyle(
+            fontFamily: globalFontFamily,
+            fontSize: globalFontSize,
+            color: letterColors[colorIndex],
+            shadows: const [
+              Shadow(
+                offset: Offset(2.0, 2.0),
+                blurRadius: 3.0,
+                color: Colors.black,
+              ),
+            ],
+          )),
+    );
+  }
+}
+
+
+

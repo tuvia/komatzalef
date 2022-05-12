@@ -42,10 +42,10 @@ const List<ScreenDefinition> screenList = [
       Colors.deepOrange),
 
   ScreenDefinition(
-      WidgetExerciseLetters(
-        title: "Exercise",
+      WidgetExercise(
+        title: "אבג - אָבָגָ",
       ),
-      "Exercise",
+      "אבג - אָבָגָ",
       Colors.blue,
       Colors.tealAccent),
 

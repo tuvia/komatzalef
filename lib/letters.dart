@@ -3,21 +3,6 @@ import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 import 'globals.dart';
 
-int colorIndex = 0;
-
-const List<Color> letterColors = [
-  Colors.amber,
-  Colors.red,
-  Colors.blue,
-  Colors.pink,
-  Colors.purpleAccent,
-  Colors.green,
-  Colors.lime,
-  Colors.orange,
-  Colors.brown,
-  Colors.indigo,
-  Colors.white,
-];
 
 
 class Ois {
@@ -914,11 +899,6 @@ class _WidgetLettersState extends State<WidgetLetters> {
 
 
   Widget buildOis(OisProvider oisProvider, Ois ois) {
-// change the colors of the letters
-    colorIndex++;
-    if (colorIndex >= letterColors.length) {
-      colorIndex = 0;
-    }
 
     return TextButton(
       style: TextButton.styleFrom(
@@ -932,7 +912,7 @@ class _WidgetLettersState extends State<WidgetLetters> {
           style: TextStyle(
             fontFamily: globalFontFamily,
             fontSize: globalFontSize,
-            color: letterColors[colorIndex],
+            color: getColor(),
             shadows: const [
               Shadow(
                 offset: Offset(2.0, 2.0),
@@ -1008,11 +988,6 @@ class _WidgetNekudosState extends State<WidgetNekudos> {
   
 
   Widget buildNekuda(NekudaProvider nekudaProvider, Nekuda nekuda) {
-// change the colors of the letters
-    colorIndex++;
-    if (colorIndex >= letterColors.length) {
-      colorIndex = 0;
-    }
 
     return TextButton(
       style: TextButton.styleFrom(
@@ -1026,7 +1001,7 @@ class _WidgetNekudosState extends State<WidgetNekudos> {
           style: TextStyle(
             fontFamily: globalFontFamily,
             fontSize: globalFontSize,
-            color: letterColors[colorIndex],
+            color: getColor(),
             shadows: const [
               Shadow(
                 offset: Offset(2.0, 2.0),
@@ -1122,7 +1097,7 @@ class _WidgetAvarosState extends State<WidgetAvaros> {
               style: TextStyle(
                 fontFamily: globalFontFamily,
                 fontSize: globalFontSize,
-                color: letterColors[colorIndex],
+                color: getColor(),
                 shadows: const [
                   Shadow(
                     offset: Offset(2.0, 2.0),
@@ -1133,10 +1108,6 @@ class _WidgetAvarosState extends State<WidgetAvaros> {
               )),
         ));
 
-        colorIndex++;
-        if (colorIndex >= letterColors.length) {
-          colorIndex = 0;
-        }
       }
 
 
@@ -1155,7 +1126,7 @@ class _WidgetAvarosState extends State<WidgetAvaros> {
               style: TextStyle(
                 fontFamily: globalFontFamily,
                 fontSize: globalFontSize,
-                color: letterColors[colorIndex],
+                color: getColor(),
                 shadows: const [
                   Shadow(
                     offset: Offset(2.0, 2.0),
@@ -1166,10 +1137,6 @@ class _WidgetAvarosState extends State<WidgetAvaros> {
               )),
         ));
 
-        colorIndex++;
-        if (colorIndex >= letterColors.length) {
-          colorIndex = 0;
-        }
       }
 
       wl2.add(const SizedBox(height: 20,));
@@ -1369,11 +1336,6 @@ class _WidgetAvarosExerciseState extends State<WidgetAvarosExercise> {
 
 
   Widget buildAvara(AvaraProvider avaraProvider, Avara avara) {
-// change the colors of the letters
-    colorIndex++;
-    if (colorIndex >= letterColors.length) {
-      colorIndex = 0;
-    }
 
     return TextButton(
       style: TextButton.styleFrom(
@@ -1387,7 +1349,7 @@ class _WidgetAvarosExerciseState extends State<WidgetAvarosExercise> {
           style: TextStyle(
             fontFamily: globalFontFamily,
             fontSize: globalFontSize,
-            color: letterColors[colorIndex],
+            color: getColor(),
             shadows: const [
               Shadow(
                 offset: Offset(2.0, 2.0),

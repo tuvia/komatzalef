@@ -18,10 +18,10 @@ const List<ScreenDefinition> exerciseList = [
   ScreenDefinition(WidgetExerciseAvara(title:  "אֵ", avara: Avaros.nekudaTzeire,), "אֵ", Colors.deepPurpleAccent, Colors.orange),
   ScreenDefinition(WidgetExerciseAvara(title:  "אֶ", avara: Avaros.nekudaSegol,), "אֶ", Colors.grey, Colors.cyan),
   ScreenDefinition(WidgetExerciseAvara(title:  "אֹ", avara: Avaros.nekudaJoilom,), "אֹ", Colors.lightBlue, Colors.teal),
-  ScreenDefinition(WidgetExerciseAvara(title:  'אוֹ', avara: Avaros.nekudaJoilomMole,), 'אוֹ', Colors.lightBlue, Colors.teal),
-  ScreenDefinition(WidgetExerciseAvara(title:  "אִ", avara: Avaros.nekudaJirik,), "אִ", Colors.lightBlue, Colors.teal),
-  ScreenDefinition(WidgetExerciseAvara(title:  "אוּ", avara: Avaros.nekudaShuruk,),  "אוּ", Colors.lightBlue, Colors.teal),
-  ScreenDefinition(WidgetExerciseAvara(title:  'אֻ', avara: Avaros.nekudaKubutz,), 'אֻ', Colors.lightBlue, Colors.teal),
+  ScreenDefinition(WidgetExerciseAvara(title:  'אוֹ', avara: Avaros.nekudaJoilomMole,), 'אוֹ', Colors.white24, Colors.purple),
+  ScreenDefinition(WidgetExerciseAvara(title:  "אִ", avara: Avaros.nekudaJirik,), "אִ", Colors.indigo, Colors.tealAccent),
+  ScreenDefinition(WidgetExerciseAvara(title:  "אוּ", avara: Avaros.nekudaShuruk,),  "אוּ", Colors.white10, Colors.brown),
+  ScreenDefinition(WidgetExerciseAvara(title:  'אֻ', avara: Avaros.nekudaKubutz,), 'אֻ', Colors.black38, Colors.white),
 ];
 
 

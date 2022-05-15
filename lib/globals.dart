@@ -56,6 +56,46 @@ class Word {
 }
 
 
+
+/*
+ * Return a color
+ */
+
+int _colorIndex = 0;
+
+const List<Color> _colors = [
+  Colors.amber,
+  Colors.red,
+  Colors.blue,
+  Colors.pink,
+  Colors.purpleAccent,
+  Colors.green,
+  Colors.lime,
+  Colors.orange,
+  Colors.brown,
+  Colors.indigo,
+  Colors.white,
+];
+
+
+Color getColor() {
+  _colorIndex++;
+
+  if (_colorIndex >= _colors.length) {
+    _colorIndex = 0;
+  }
+
+  return _colors[_colorIndex];
+
+}
+
+
+
+
+
+
+
+
 /*
  * Produce a widget with the word with colors and blinking
  * specified
@@ -76,7 +116,7 @@ Widget buildWordWidget(Word word) {
         word.word[i].letter,
         style: TextStyle(
           fontFamily: globalFontFamily,
-          fontSize: 60,
+          fontSize: globalFontSize,
           color: word.word[i].color,
           shadows: const [
             Shadow(

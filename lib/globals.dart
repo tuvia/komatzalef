@@ -1,9 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:komatzalef/shvo.dart';
-import 'package:share/share.dart';
 import 'package:blinking_text/blinking_text.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:share_plus/share_plus.dart';
 
 
 
@@ -328,38 +329,48 @@ AppBar buildAppBar(BuildContext context, String title) {
     }, icon: const Icon(Icons.help),
   );
 
-  if (Platform.isAndroid) {
+  AppBar regularAppBar = AppBar(
+    actions: [
+      helpIcon,
+      IconButton(
+          onPressed: () {
+            const url =
+                'Komatz Alef\n\n*Android*\nhttps://play.google.com/store/apps/details?id=org.jabadlaplata.komatzalef\n\n*iOS*\nhttps://apps.apple.com/us/app/komatz-alef/id1613445824';
+            const msg = 'Komatz Alef App\n\n';
 
-    return AppBar(
-      actions: [
-        helpIcon,
-        IconButton(
-            onPressed: () {
-              const url =
-                  'https://play.google.com/store/apps/details?id=org.jabadlaplata.komatzalef\n https://apps.apple.com/us/app/komatz-alef/id1613445824';
-              const msg = 'Komatz Alef App\n\n';
+            Share.share(msg + ' ' + url, subject: msg);
+          },
+          icon: const Icon(Icons.share)),
+    ],
+    title: Text(title, style: const TextStyle(
+      fontFamily: globalFontFamily,
+      fontSize: 30,
+    ),),
+  );
 
-              Share.share(msg + ' ' + url, subject: msg);
-            },
-            icon: const Icon(Icons.share)),
-      ],
-      title: Text(title, style: const TextStyle(
-        fontFamily: globalFontFamily,
-        fontSize: 30,
-      ),),
-    );
-  } else {
-    return AppBar(
-      actions: [
-        helpIcon,
-      ],
-      title: Text(title, style: const TextStyle(
-        fontFamily: globalFontFamily,
-        fontSize: 30,
-      ),),
-    );
+
+
+
+
+  if (!kIsWeb) {
+    if (Platform.isAndroid) {
+      return regularAppBar;
+    } else {
+      return AppBar(
+        actions: [
+          helpIcon,
+        ],
+        title: Text(title, style: const TextStyle(
+          fontFamily: globalFontFamily,
+          fontSize: 30,
+        ),),
+      );
+    }
+  } else {  // running on WEB
+    return regularAppBar;
   }
 }
+
 
 
 

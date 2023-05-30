@@ -20,7 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  share: any
+  share_plus: any
   blinking_text: any
   just_audio: any
   provider: any

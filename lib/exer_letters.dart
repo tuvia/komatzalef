@@ -22,6 +22,8 @@ const List<ScreenDefinition> exerciseList = [
   ScreenDefinition(WidgetExerciseAvara(title:  "אִ", avara: Avaros.nekudaJirik,), "אִ", Colors.indigo, Colors.tealAccent),
   ScreenDefinition(WidgetExerciseAvara(title:  "אוּ", avara: Avaros.nekudaShuruk,),  "אוּ", Colors.white10, Colors.brown),
   ScreenDefinition(WidgetExerciseAvara(title:  'אֻ', avara: Avaros.nekudaKubutz,), 'אֻ', Colors.black38, Colors.white),
+  ScreenDefinition(WidgetExerciseAvara(title:  'אְ', avara: Avaros.nekudaShevo,), 'אְ', Colors.cyanAccent, Colors.deepPurpleAccent),
+
 ];
 
 

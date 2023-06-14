@@ -5,7 +5,7 @@ description: Komatz Alef
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 3.1.1+18
+version: 3.1.2+19
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
@@ -288,6 +288,33 @@ flutter:
     - audios/a0729.mp3
     - audios/a0730.mp3
     - audios/a0731.mp3
+    - audios/a0800.mp3
+    - audios/a0801.mp3
+    - audios/a0802.mp3
+    - audios/a0803.mp3
+    - audios/a0804.mp3
+    - audios/a0805.mp3
+    - audios/a0806.mp3
+    - audios/a0807.mp3
+    - audios/a0808.mp3
+    - audios/a0809.mp3
+    - audios/a0810.mp3
+    - audios/a0811.mp3
+    - audios/a0812.mp3
+    - audios/a0814.mp3
+    - audios/a0815.mp3
+    - audios/a0817.mp3
+    - audios/a0819.mp3
+    - audios/a0820.mp3
+    - audios/a0821.mp3
+    - audios/a0822.mp3
+    - audios/a0824.mp3
+    - audios/a0826.mp3
+    - audios/a0827.mp3
+    - audios/a0828.mp3
+    - audios/a0829.mp3
+    - audios/a0830.mp3
+    - audios/a0831.mp3
     - audios/n00.mp3
     - audios/n01.mp3
     - audios/n02.mp3

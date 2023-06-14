@@ -176,6 +176,8 @@ const nekudaJoilom = "05";
 const nekudaJoilomMole = "09";
 const nekudaJirik = "06";
 const nekudaKubutz = "04";
+const nekudaShevo = "08";
+
 
 enum Avaros {
   nekudaKomatz,
@@ -187,6 +189,7 @@ enum Avaros {
   nekudaJoilom,
   nekudaJoilomMole,
   nekudaJirik,
+  nekudaShevo
 }
 
 class AvaraProvider extends ChangeNotifier {
@@ -199,6 +202,7 @@ class AvaraProvider extends ChangeNotifier {
   final List<Avara> joilom = [];
   final List<Avara> joilomMole = [];
   final List<Avara> jirik = [];
+  final List<Avara> shevo = [];
 
   List<Avara> workingAvara = [];
   List<Avara> selectedLetters = [];
@@ -316,7 +320,10 @@ class AvaraProvider extends ChangeNotifier {
         workingAvara.addAll( segol);
         break;
       case Avaros.nekudaShuruk:
-        workingAvara.addAll( shuruk);
+        workingAvara.addAll(shuruk);
+        break;
+      case Avaros.nekudaShevo:
+        workingAvara.addAll(shevo);
         break;
     }
 
@@ -363,6 +370,9 @@ class AvaraProvider extends ChangeNotifier {
       case Avaros.nekudaShuruk:
         workingAvara.addAll(shuruk);
         break;
+      case Avaros.nekudaShevo:
+        workingAvara.addAll(shevo);
+        break;
     }
 
     workingAvara.shuffle();
@@ -407,6 +417,9 @@ class AvaraProvider extends ChangeNotifier {
 
       case Avaros.nekudaShuruk:
         workingAvara.addAll(shuruk);
+        break;
+      case Avaros.nekudaShevo:
+        workingAvara.addAll(shevo);
         break;
     }
 
@@ -673,6 +686,37 @@ class AvaraProvider extends ChangeNotifier {
     jirik.add(Avara('תִ', nekudaJirik + "31"));
     jirik.add(Avara('תִּ', nekudaJirik + "30"));
 
+
+
+
+    shevo.add(Avara('אְ', nekudaShevo + "00"));
+    shevo.add(Avara('בְּ', nekudaShevo + "01"));
+    shevo.add(Avara('בְ', nekudaShevo + "02"));
+    shevo.add(Avara('גְ', nekudaShevo + "03"));
+    shevo.add(Avara('דְ', nekudaShevo + "04"));
+    shevo.add(Avara('הְ', nekudaShevo + "05"));
+    shevo.add(Avara('וְ', nekudaShevo + "06"));
+    shevo.add(Avara('זְ', nekudaShevo + "07"));
+    shevo.add(Avara('חְ', nekudaShevo + "08"));
+    shevo.add(Avara('טְ', nekudaShevo + "09"));
+    shevo.add(Avara('יְ', nekudaShevo + "10"));
+    shevo.add(Avara('כְּ', nekudaShevo + "11"));
+    shevo.add(Avara('כְ', nekudaShevo + "12"));
+    shevo.add(Avara('לְ', nekudaShevo + "14"));
+    shevo.add(Avara('מְ', nekudaShevo + "15"));
+    shevo.add(Avara('נְ', nekudaShevo + "17"));
+    shevo.add(Avara('סְ', nekudaShevo + "19"));
+    shevo.add(Avara('עְ', nekudaShevo + "20"));
+    shevo.add(Avara('פְּ', nekudaShevo + "21"));
+    shevo.add(Avara('פְ', nekudaShevo + "22"));
+    shevo.add(Avara('צְ', nekudaShevo + "24"));
+    shevo.add(Avara('קְ', nekudaShevo + "26"));
+    shevo.add(Avara('רְ', nekudaShevo + "27"));
+    shevo.add(Avara('שְׁ', nekudaShevo + "28"));
+    shevo.add(Avara('שְׂ', nekudaShevo + "29"));
+    shevo.add(Avara('תְ', nekudaShevo + "31"));
+    shevo.add(Avara('תְּ', nekudaShevo + "30"));
+
     workingAvara.addAll(komatz);
   }
 
@@ -700,6 +744,8 @@ class AvaraProvider extends ChangeNotifier {
         return joilomMole;
       case "06":
         return jirik;
+      case "08":
+        return shevo;
     }
 
     return komatz;

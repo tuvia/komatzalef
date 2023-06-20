@@ -5,7 +5,7 @@ description: Komatz Alef
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 3.1.2+19
+version: 3.2.0+20
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
@@ -57,6 +57,27 @@ flutter:
   assets:
     - images/ar.png
     - images/us.png
+    - audios/00alef.mp3
+    - audios/01beis.mp3
+    - audios/02veis.mp3
+    - audios/03guimel.mp3
+    - audios/04dalet.mp3
+    - audios/05hei.mp3
+    - audios/06vav.mp3
+    - audios/07zain.mp3
+    - audios/08jes.mp3
+    - audios/09tes.mp3
+    - audios/10iud.mp3
+    - audios/11kof.mp3
+    - audios/12lamed.mp3
+    - audios/13mem.mp3
+    - audios/14nun.mp3
+    - audios/15samej.mp3
+    - audios/16pei.mp3
+    - audios/17fei.mp3
+    - audios/18tzadik.mp3
+    - audios/19reish.mp3
+    - audios/20shin.mp3
     - audios/aj.mp3
     - audios/mizbeaj.mp3
     - audios/nijoaj.mp3

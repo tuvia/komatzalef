@@ -118,18 +118,39 @@ class _WidgetExerciseLettersState extends State<WidgetExerciseLetters> {
 
           wl.add(const SizedBox(height: 10,));
 
-          wl.add(Padding(
+          wl.add(
+
+
+
+              Row(
+                children: [
+
+                  Padding(
+                    padding: const EdgeInsets.only(right: 32),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: IconButton(
+                        icon: const Icon(Icons.select_all),
+                        onPressed: () {
+                          oisProvider.selectAll(_list);
+                        },
+                      ),
+                    ),
+                  ),
+
+                  Padding(
             padding: const EdgeInsets.only(right: 32),
             child: Align(
-              alignment: Alignment.centerRight,
-              child: IconButton(
-                icon: const Icon(Icons.cancel),
-                onPressed: () {
-                  oisProvider.unselectAll();
-                },
-              ),
+                alignment: Alignment.centerRight,
+                child: IconButton(
+                  icon: const Icon(Icons.cancel),
+                  onPressed: () {
+                    oisProvider.unselectAll();
+                  },
+                ),
             ),
-          ));
+          ),
+              ]));
 
           wl.add(const SizedBox(height: 5,));
 

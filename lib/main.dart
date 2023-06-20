@@ -26,6 +26,15 @@ const List<ScreenDefinition> screenList = [
       Colors.lime),
 
   ScreenDefinition(
+      WidgetLetters(
+        title: "... אבג",
+        type: LetterType.allLettersSound,
+      ),
+      "... אבג",
+      Colors.deepOrange,
+      Colors.white70),
+
+  ScreenDefinition(
       WidgetNekudos(
         title: "ֵ ַ ָ ",
       ),

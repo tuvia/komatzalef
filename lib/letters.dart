@@ -7,10 +7,11 @@ import 'globals.dart';
 
 class Ois {
   final String ois;
+  late final String name;
   late final String sound;
 
-  Ois(this.ois, String sound) {
-    this.sound = 'o' + sound + '.mp3';
+  Ois(this.ois, String n, this.sound) {
+    name = 'o' + n + '.mp3';
   }
 }
 
@@ -28,39 +29,39 @@ class OisProvider extends ChangeNotifier {
     // Initialize audio player
     audioPlayer = AudioPlayer();
 
-    letters.add(Ois('א', "00"));
-    letters.add(Ois('בּ', "01"));
-    letters.add(Ois('ב', "02"));
-    letters.add(Ois('ג', "03"));
-    letters.add(Ois('ד', "04"));
-    letters.add(Ois('ה', "05"));
-    letters.add(Ois('ו', "06"));
-    letters.add(Ois('ז', "07"));
-    letters.add(Ois('ח', "08"));
-    letters.add(Ois('ט', "09"));
-    letters.add(Ois('י', "10"));
-    letters.add(Ois('כּ', "11"));
-    letters.add(Ois('כ', "12"));
-    letters.add(Ois('ך', "13"));
-    letters.add(Ois('ךּ', "32"));
-    letters.add(Ois('ל', "14"));
-    letters.add(Ois('מ', "15"));
-    letters.add(Ois('ם', "16"));
-    letters.add(Ois('נ', "17"));
-    letters.add(Ois('ן', "18"));
-    letters.add(Ois('ס', "19"));
-    letters.add(Ois('ע', "20"));
-    letters.add(Ois('פּ', "21"));
-    letters.add(Ois('פ', "22"));
-    letters.add(Ois('ף', "23"));
-    letters.add(Ois('צ', "24"));
-    letters.add(Ois('ץ', "25"));
-    letters.add(Ois('ק', "26"));
-    letters.add(Ois('ר', "27"));
-    letters.add(Ois('שׁ', "28"));
-    letters.add(Ois('שׂ', "29"));
-    letters.add(Ois('תּ', "30"));
-    letters.add(Ois('ת', "31"));
+    letters.add(Ois('א', "00", "audios/00alef.mp3"));
+    letters.add(Ois('בּ', "01", "audios/01beis.mp3"));
+    letters.add(Ois('ב', "02", "audios/02veis.mp3"));
+    letters.add(Ois('ג', "03", "audios/03guimel.mp3"));
+    letters.add(Ois('ד', "04", "audios/04dalet.mp3"));
+    letters.add(Ois('ה', "05", "audios/05hei.mp3"));
+    letters.add(Ois('ו', "06", "audios/06vav.mp3"));
+    letters.add(Ois('ז', "07", "audios/07zain.mp3"));
+    letters.add(Ois('ח', "08", "audios/08jes.mp3"));
+    letters.add(Ois('ט', "09", "audios/09tes.mp3"));
+    letters.add(Ois('י', "10", "audios/10iud.mp3"));
+    letters.add(Ois('כּ', "11", "audios/11kof.mp3"));
+    letters.add(Ois('כ', "12", "audios/08jes.mp3"));
+    letters.add(Ois('ך', "13", "audios/08jes.mp3"));
+    letters.add(Ois('ךּ', "32", "audios/11kof.mp3"));
+    letters.add(Ois('ל', "14", "audios/12lamed.mp3"));
+    letters.add(Ois('מ', "15", "audios/13mem.mp3"));
+    letters.add(Ois('ם', "16", "audios/13mem.mp3"));
+    letters.add(Ois('נ', "17", "audios/14nun.mp3"));
+    letters.add(Ois('ן', "18", "audios/14nun.mp3"));
+    letters.add(Ois('ס', "19", "audios/15samej.mp3"));
+    letters.add(Ois('ע', "20", "audios/00alef.mp3"));
+    letters.add(Ois('פּ', "21", "audios/16pei.mp3"));
+    letters.add(Ois('פ', "22", "audios/17fei.mp3"));
+    letters.add(Ois('ף', "23", "audios/17fei.mp3"));
+    letters.add(Ois('צ', "24", "audios/18tzadik.mp3"));
+    letters.add(Ois('ץ', "25", "audios/18tzadik.mp3"));
+    letters.add(Ois('ק', "26", "audios/11kof.mp3"));
+    letters.add(Ois('ר', "27", "audios/19reish.mp3"));
+    letters.add(Ois('שׁ', "28", "audios/20shin.mp3"));
+    letters.add(Ois('שׂ', "29", "audios/15samej.mp3"));
+    letters.add(Ois('תּ', "30", "audios/09tes.mp3"));
+    letters.add(Ois('ת', "31", "audios/15samej.mp3"));
 
     workingLetters.addAll(letters);
   }
@@ -77,6 +78,20 @@ class OisProvider extends ChangeNotifier {
 
   void unselectAll({bool notify = true}) {
     selectedLetters.clear();
+    if (notify) {
+      notifyListeners();
+    }
+  }
+
+  void selectAll(List list, {bool notify = true}) {
+
+    selectedLetters.clear();
+
+    // add all oisios
+    for (int i = 0; i <= list.length; i++) {
+      selectedLetters.add(list[i]);
+    }
+
     if (notify) {
       notifyListeners();
     }
@@ -129,8 +144,13 @@ class OisProvider extends ChangeNotifier {
     }
   }
 
-  void play(Ois ois) async {
-    await audioPlayer.setAsset("audios/" + ois.sound);
+  void play(Ois ois, {sound = false}) async {
+    if (!sound) {
+      await audioPlayer.setAsset("audios/" + ois.name);
+    } else {
+      await audioPlayer.setAsset(ois.sound);
+    }
+
     await audioPlayer.play();
   }
 
@@ -275,7 +295,22 @@ class AvaraProvider extends ChangeNotifier {
       n = "07";
     }
 
-    String avara = "a" + n + ois.sound.substring(1, 3);
+    String avara = "a" + n + ois.name.substring(1, 3);
+
+    if (ois.ois == "ו") {
+      switch (nekuda.nekuda) {
+        case "ֹ ":
+          avara = "a" + n + "00";
+          break;
+        case "ֻ ":
+          avara = "a" + n + "06";
+          break;
+        case "וּ":
+          avara = "a" + n + "00";
+          break;
+      }
+    }
+
     await audioPlayer.setAsset("audios/" + avara + ".mp3");
     await audioPlayer.play();
   }
@@ -552,7 +587,7 @@ class AvaraProvider extends ChangeNotifier {
     shuruk.add(Avara('גוּ', nekudaShuruk + "03"));
     shuruk.add(Avara('דוּ', nekudaShuruk + "04"));
     shuruk.add(Avara('הוּ', nekudaShuruk + "05"));
-    shuruk.add(Avara('וּ', nekudaShuruk + "06"));
+    shuruk.add(Avara('וּ', nekudaShuruk + "00"));     // "06" VU
     shuruk.add(Avara('זוּ', nekudaShuruk + "07"));
     shuruk.add(Avara('חוּ', nekudaShuruk + "08"));
     shuruk.add(Avara('טוּ', nekudaShuruk + "09"));
@@ -580,7 +615,7 @@ class AvaraProvider extends ChangeNotifier {
     kubutz.add(Avara('גֻ', nekudaShuruk + "03"));
     kubutz.add(Avara('דֻ', nekudaShuruk + "04"));
     kubutz.add(Avara('הֻ', nekudaShuruk + "05"));
-    kubutz.add(Avara('וֻ', nekudaShuruk + "02"));
+    kubutz.add(Avara('וֻ', nekudaShuruk + "06"));
     kubutz.add(Avara('זֻ', nekudaShuruk + "07"));
     kubutz.add(Avara('חֻ', nekudaShuruk + "08"));
     kubutz.add(Avara('טֻ', nekudaShuruk + "09"));
@@ -664,7 +699,7 @@ class AvaraProvider extends ChangeNotifier {
     jirik.add(Avara('גִ', nekudaJirik + "03"));
     jirik.add(Avara('דִ', nekudaJirik + "04"));
     jirik.add(Avara('הִ', nekudaJirik + "05"));
-    jirik.add(Avara('וִ', nekudaJirik + "02"));
+    jirik.add(Avara('וִ', nekudaJirik + "06"));
     jirik.add(Avara('זִ', nekudaJirik + "07"));
     jirik.add(Avara('חִ', nekudaJirik + "08"));
     jirik.add(Avara('טִ', nekudaJirik + "09"));
@@ -761,7 +796,25 @@ class AvaraProvider extends ChangeNotifier {
     List<Avara> _list = _getAvaraList(nekuda);
 
     // find the proper avara in the list
-    int index = _list.indexWhere((element) => element.sound.substring(3, 5).contains(ois.sound.substring(1, 3)));
+    int index = _list.indexWhere((element) => element.sound.substring(3, 5).contains(ois.name.substring(1, 3)));
+
+    // could be a letter vov
+    if (index == -1) {
+      if (ois.ois == "ו") {
+        switch (nekuda.nekuda) {
+          case "וּ":
+            return Avara("וּ", nekudaShuruk + "00");
+          case "ִ ":
+              return Avara("וִ", nekudaJirik + "06");
+          case "ֻ ":
+            return Avara('וֻ', nekudaShuruk + "06");
+          case "ֹו":
+            return Avara('ווֹ', nekudaJoilom + "06");
+        }
+
+      }
+    }
+
     return _list[index];
   }
 
@@ -845,6 +898,7 @@ class NekudaProvider extends ChangeNotifier {
 enum LetterType {
   allLetters,
   someLetters,
+  allLettersSound
 }
 
 
@@ -876,6 +930,7 @@ class _WidgetLettersState extends State<WidgetLetters> {
         List _list = [];
 
         switch (widget.type) {
+          case LetterType.allLettersSound:
           case LetterType.allLetters:
             _list = oisProvider.get();
             break;
@@ -883,6 +938,7 @@ class _WidgetLettersState extends State<WidgetLetters> {
           case LetterType.someLetters:
             _list = oisProvider.getSelected(widget.repetition);
             break;
+
         }
 
         List<Widget> wl = [];
@@ -917,6 +973,7 @@ class _WidgetLettersState extends State<WidgetLetters> {
         onPressed: () {
           switch (widget.type) {
             case LetterType.allLetters:
+            case LetterType.allLettersSound:
               oisProvider.shuffle();
               break;
 
@@ -951,8 +1008,23 @@ class _WidgetLettersState extends State<WidgetLetters> {
         padding: EdgeInsets.zero,
       ),
       onPressed: () async {
-        oisProvider.play(ois);
-        await dialogScreen(context, ois.ois, ois.sound);
+
+        switch (widget.type) {
+
+          case LetterType.allLetters:
+          case LetterType.someLetters:
+
+            oisProvider.play(ois);
+            await dialogScreen(context, ois.ois, ois.name);
+            break;
+
+          case LetterType.allLettersSound:
+            oisProvider.play(ois, sound: true);
+            break;
+        }
+
+
+
       },
       child: Text(ois.ois,
           style: TextStyle(

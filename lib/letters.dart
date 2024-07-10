@@ -168,6 +168,13 @@ class OisProvider extends ChangeNotifier {
     return false;
   }
 
+  bool isEndeNun(Ois ois) {
+    if (ois.ois ==  "ן") {
+        return true;
+    }
+
+    return false;
+  }
 
   @override
   void dispose() {
@@ -798,6 +805,7 @@ class AvaraProvider extends ChangeNotifier {
     // find the proper avara in the list
     int index = _list.indexWhere((element) => element.sound.substring(3, 5).contains(ois.name.substring(1, 3)));
 
+    //
     // could be a letter vov
     if (index == -1) {
       if (ois.ois == "ו") {
@@ -812,6 +820,12 @@ class AvaraProvider extends ChangeNotifier {
             return Avara('ווֹ', nekudaJoilom + "06");
         }
 
+      }
+      // it could be ende nun with komatz
+      // avara.sound == a0017.mp3
+      // ois.name == o18.mp3
+      else if (ois.name == "o18.mp3" && nekuda.nekuda == 'ָ ') {
+        return Avara('ןָ', nekudaKomatz + "17");
       }
     }
 
@@ -891,6 +905,13 @@ class NekudaProvider extends ChangeNotifier {
     }
   }
 
+  bool isKomatz(Nekuda nekuda) {
+    if (nekuda.nekuda == 'ָ ') {
+      return true;
+    }
+
+    return false;
+  }
 }
 
 
@@ -1208,6 +1229,16 @@ class _WidgetAvarosState extends State<WidgetAvaros> {
                 await dialogScreen(context, avara.avara, avara.sound);
               }
             } else {
+              // ende nun sounds!
+              if (_oisProvider.isEndeNun(letters[i]) && wasNekudaPressed && _nekudaProvider.isKomatz(nekudaPressed)) {
+                await Future.delayed(const Duration(milliseconds: 900));
+                _avaraProvider.play(letters[i], nekudaPressed);
+                wasNekudaPressed = false;
+
+                Avara avara = _avaraProvider.getAvara(letters[i], nekudaPressed);
+                await dialogScreen(context, avara.avara, avara.sound);
+              }
+
               wasNekudaPressed = false;
             }
           },

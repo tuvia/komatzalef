@@ -28,7 +28,8 @@ if (flutterVersionName == null) {
 }
 
 android {
-    compileSdkVersion 34
+    compileSdkVersion 35
+    namespace "org.jabadlaplata.komatzalef"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -38,9 +39,9 @@ android {
     defaultConfig {
         applicationId "org.jabadlaplata.komatzalef"
         //minSdkVersion flutter.minSdkVersion
-        minSdkVersion 19
+        minSdkVersion flutter.minSdkVersion
         multiDexEnabled true
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
 

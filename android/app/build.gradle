@@ -28,7 +28,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    compileSdkVersion 35
+    compileSdkVersion 36
     namespace "org.jabadlaplata.komatzalef"
 
     compileOptions {
@@ -41,7 +41,7 @@ android {
         //minSdkVersion flutter.minSdkVersion
         minSdkVersion flutter.minSdkVersion
         multiDexEnabled true
-        targetSdkVersion 35
+        targetSdkVersion 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
 
